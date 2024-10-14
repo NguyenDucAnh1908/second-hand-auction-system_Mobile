@@ -1,14 +1,15 @@
-package fpt.edu.vn.asfsg1.activity.ui.login;
+package fpt.edu.vn.asfsg1.activity.data.login;
 
 import androidx.lifecycle.LiveData;
 import androidx.lifecycle.MutableLiveData;
 import androidx.lifecycle.ViewModel;
 import android.util.Patterns;
 
+import fpt.edu.vn.asfsg1.R;
 import fpt.edu.vn.asfsg1.activity.data.LoginRepository;
 import fpt.edu.vn.asfsg1.activity.data.Result;
 import fpt.edu.vn.asfsg1.activity.data.model.LoggedInUser;
-import fpt.edu.vn.asfsg1.activity.R;
+
 
 public class LoginViewModel extends ViewModel {
 

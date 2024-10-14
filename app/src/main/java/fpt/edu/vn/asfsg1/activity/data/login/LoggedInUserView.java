@@ -1,4 +1,4 @@
-package  fpt.edu.vn.asfsg1.activity.ui.login;
+package fpt.edu.vn.asfsg1.activity.data.login;
 
 /**
  * Class exposing authenticated user details to the UI.

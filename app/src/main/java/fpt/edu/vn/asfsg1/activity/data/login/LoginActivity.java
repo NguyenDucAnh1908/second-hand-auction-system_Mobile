@@ -1,47 +1,66 @@
-package  fpt.edu.vn.asfsg1.activity.ui.login;
+package fpt.edu.vn.asfsg1.activity.data.login;
 
 import android.app.Activity;
 import androidx.lifecycle.Observer;
 import androidx.lifecycle.ViewModelProvider;
+
+import android.graphics.Color;
+import android.graphics.Typeface;
 import android.os.Bundle;
 import androidx.annotation.Nullable;
 import androidx.annotation.StringRes;
 import androidx.appcompat.app.AppCompatActivity;
 import android.text.Editable;
+import android.text.Spannable;
+import android.text.SpannableString;
 import android.text.TextWatcher;
+import android.text.style.AbsoluteSizeSpan;
+import android.text.style.ForegroundColorSpan;
+import android.text.style.StyleSpan;
 import android.view.KeyEvent;
 import android.view.View;
 import android.view.inputmethod.EditorInfo;
-import android.widget.Button;
 import android.widget.EditText;
 import android.widget.ProgressBar;
 import android.widget.TextView;
 import android.widget.Toast;
 
-import fpt.edu.vn.asfsg1.activity.R;
-import fpt.edu.vn.asfsg1.activity.ui.login.LoginViewModel;
-import fpt.edu.vn.asfsg1.activity.ui.login.LoginViewModelFactory;
+
+import fpt.edu.vn.asfsg1.R;
 import fpt.edu.vn.asfsg1.databinding.ActivityLoginBinding;
 
 public class LoginActivity extends AppCompatActivity {
 
     private LoginViewModel loginViewModel;
-private ActivityLoginBinding binding;
+    private ActivityLoginBinding binding;
+
 
     @Override
     public void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
 
-     binding = ActivityLoginBinding.inflate(getLayoutInflater());
-     setContentView(binding.getRoot());
+        binding = ActivityLoginBinding.inflate(getLayoutInflater());
+        setContentView(binding.getRoot());
 
         loginViewModel = new ViewModelProvider(this, new LoginViewModelFactory())
                 .get(LoginViewModel.class);
 
         final EditText usernameEditText = binding.username;
         final EditText passwordEditText = binding.password;
-        final Button loginButton = binding.login;
+        final TextView loginButton = (TextView) binding.login;
         final ProgressBar loadingProgressBar = binding.loading;
+        final TextView tvSignUp = binding.tvSignUp;
+
+        String text = "Chưa có tài khoản? Đăng ký";
+
+        SpannableString spannableString = new SpannableString(text);
+        int startIndex = text.indexOf("Đăng ký");
+        int endIndex = startIndex + "Đăng ký".length();
+
+        spannableString.setSpan(new StyleSpan(Typeface.BOLD), startIndex, endIndex, Spannable.SPAN_EXCLUSIVE_EXCLUSIVE);
+        spannableString.setSpan(new ForegroundColorSpan(Color.parseColor("#19B269")), startIndex, endIndex, Spannable.SPAN_EXCLUSIVE_EXCLUSIVE);
+        spannableString.setSpan(new AbsoluteSizeSpan(20, true), startIndex, endIndex, Spannable.SPAN_EXCLUSIVE_EXCLUSIVE);
+        tvSignUp.setText(spannableString);
 
         loginViewModel.getLoginFormState().observe(this, new Observer<LoginFormState>() {
             @Override

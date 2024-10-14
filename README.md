@@ -1,1 +1,0 @@
-# second-hand-auction-system_Mobile
