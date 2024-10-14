@@ -4,6 +4,7 @@ import android.app.Activity;
 import androidx.lifecycle.Observer;
 import androidx.lifecycle.ViewModelProvider;
 
+import android.content.Intent;
 import android.graphics.Color;
 import android.graphics.Typeface;
 import android.os.Bundle;
@@ -27,6 +28,7 @@ import android.widget.Toast;
 
 
 import fpt.edu.vn.asfsg1.R;
+import fpt.edu.vn.asfsg1.activity.SignUpActivity;
 import fpt.edu.vn.asfsg1.databinding.ActivityLoginBinding;
 
 public class LoginActivity extends AppCompatActivity {
@@ -94,6 +96,15 @@ public class LoginActivity extends AppCompatActivity {
                 setResult(Activity.RESULT_OK);
 
                 //Complete and destroy login activity once successful
+                finish();
+            }
+        });
+
+        tvSignUp.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                Intent intent = new Intent(LoginActivity.this, SignUpActivity.class);
+                startActivity(intent);
                 finish();
             }
         });
