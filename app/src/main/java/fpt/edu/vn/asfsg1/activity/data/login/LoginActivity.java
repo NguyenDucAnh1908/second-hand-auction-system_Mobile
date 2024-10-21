@@ -11,6 +11,7 @@ import android.os.Bundle;
 import androidx.annotation.Nullable;
 import androidx.annotation.StringRes;
 import androidx.appcompat.app.AppCompatActivity;
+
 import android.text.Editable;
 import android.text.Spannable;
 import android.text.SpannableString;
@@ -30,6 +31,14 @@ import android.widget.Toast;
 import fpt.edu.vn.asfsg1.R;
 import fpt.edu.vn.asfsg1.activity.SignUpActivity;
 import fpt.edu.vn.asfsg1.databinding.ActivityLoginBinding;
+import fpt.edu.vn.asfsg1.helper.APIClient;
+import fpt.edu.vn.asfsg1.request.LoginRequest;
+import fpt.edu.vn.asfsg1.response.LoginResponse;
+import fpt.edu.vn.asfsg1.response.RegisterResponse;
+import fpt.edu.vn.asfsg1.services.AuthService;
+import retrofit2.Call;
+import retrofit2.Callback;
+import retrofit2.Response;
 
 public class LoginActivity extends AppCompatActivity {
 
@@ -144,10 +153,63 @@ public class LoginActivity extends AppCompatActivity {
             @Override
             public void onClick(View v) {
                 loadingProgressBar.setVisibility(View.VISIBLE);
-                loginViewModel.login(usernameEditText.getText().toString(),
-                        passwordEditText.getText().toString());
+
+                // Retrieve input from the EditText fields
+                String username = usernameEditText.getText().toString();
+                String password = passwordEditText.getText().toString();
+
+                // Create the login request object
+                LoginRequest loginRequest = new LoginRequest(username, password);
+
+                // Initialize Retrofit and call the login API
+                AuthService apiService = APIClient.getClient().create(AuthService.class);
+                Call<LoginResponse> call = apiService.login(loginRequest);
+
+                // Execute the API call asynchronously
+                call.enqueue(new Callback<LoginResponse>() {
+                    @Override
+                    public void onResponse(Call<LoginResponse> call, Response<LoginResponse> response) {
+                        loadingProgressBar.setVisibility(View.GONE);
+
+                        if (response.isSuccessful() && response.body() != null) {
+                            // Get the response body
+                            LoginResponse loginResponse = response.body();
+
+                            // Check the status of the response
+                            if (loginResponse.getStatus() == 200) {
+                                // Login is successful
+                                LoginResponse.LoginData loginData = loginResponse.getData();
+                                LoginResponse.User user = loginData.getUser();
+
+                                // Save the token if needed (for future API calls)
+                                String token = loginData.getToken();
+                                String refreshToken = loginData.getRefresh_token();
+
+                                // Update UI with user information
+                                updateUiWithUser(new LoggedInUserView(user.getFullName()));
+
+                                // Handle successful login (e.g., navigating to the next screen)
+                            } else {
+                                // Show an error message if login failed
+                                showLoginFailed(R.string.login_failed);
+                            }
+                        } else {
+                            // Handle unsuccessful login
+                            showLoginFailed(R.string.login_failed);
+                        }
+                    }
+
+                    @Override
+                    public void onFailure(Call<LoginResponse> call, Throwable t) {
+                        // Hide the loading indicator and show an error message
+                        loadingProgressBar.setVisibility(View.GONE);
+                        showLoginFailed(R.string.login_failed);
+                    }
+                });
             }
         });
+
+
     }
 
     private void updateUiWithUser(LoggedInUserView model) {
