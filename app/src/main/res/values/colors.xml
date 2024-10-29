@@ -11,4 +11,6 @@
     <color name="lightGrey">#EFEFEF</color>
     <color name="darkGrey">#616161</color>
     <color name="grey">#d2d2d2</color>
+    <color name="background">#F7E8C7</color>
+    <color name="text">#462D48</color>
 </resources>

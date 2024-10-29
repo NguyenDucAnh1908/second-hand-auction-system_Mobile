@@ -23,7 +23,11 @@ public class LoginRepository {
 
     public static LoginRepository getInstance(LoginDataSource dataSource) {
         if(instance == null){
-            instance = new LoginRepository(dataSource);
+            synchronized (LoginRepository.class) {
+                if (instance == null) {
+                    instance = new LoginRepository(dataSource);
+                }
+            }
         }
         return instance;
     }

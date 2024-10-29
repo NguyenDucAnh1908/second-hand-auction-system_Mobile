@@ -21,6 +21,7 @@ import android.text.style.ForegroundColorSpan;
 import android.text.style.StyleSpan;
 import android.view.KeyEvent;
 import android.view.View;
+import android.view.WindowManager;
 import android.view.inputmethod.EditorInfo;
 import android.widget.EditText;
 import android.widget.ProgressBar;
@@ -49,7 +50,7 @@ public class LoginActivity extends AppCompatActivity {
     @Override
     public void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-
+        getWindow().setFlags(WindowManager.LayoutParams.FLAG_FULLSCREEN, WindowManager.LayoutParams.FLAG_FULLSCREEN);
         binding = ActivityLoginBinding.inflate(getLayoutInflater());
         setContentView(binding.getRoot());
 
@@ -61,17 +62,29 @@ public class LoginActivity extends AppCompatActivity {
         final TextView loginButton = (TextView) binding.login;
         final ProgressBar loadingProgressBar = binding.loading;
         final TextView tvSignUp = binding.tvSignUp;
+        final TextView tvForgetPassword = binding.tvForgetPassword;
 
         String text = "Chưa có tài khoản? Đăng ký";
+        String forgetText = "Quên mật khẩu? Lấy lại mật khẩu";
 
-        SpannableString spannableString = new SpannableString(text);
-        int startIndex = text.indexOf("Đăng ký");
-        int endIndex = startIndex + "Đăng ký".length();
-
-        spannableString.setSpan(new StyleSpan(Typeface.BOLD), startIndex, endIndex, Spannable.SPAN_EXCLUSIVE_EXCLUSIVE);
-        spannableString.setSpan(new ForegroundColorSpan(Color.parseColor("#19B269")), startIndex, endIndex, Spannable.SPAN_EXCLUSIVE_EXCLUSIVE);
-        spannableString.setSpan(new AbsoluteSizeSpan(20, true), startIndex, endIndex, Spannable.SPAN_EXCLUSIVE_EXCLUSIVE);
-        tvSignUp.setText(spannableString);
+        setSpannableText(tvSignUp, text, "Đăng ký");
+        setSpannableText(tvForgetPassword, forgetText, "Lấy lại mật khẩu");
+//        SpannableString spannableString = new SpannableString(text);
+//        SpannableString spannableStringForget = new SpannableString(forgetText);
+//        int startIndex = text.indexOf("Đăng ký");
+//        int startIndexForget = forgetText.indexOf("Lấy lại mật khẩu");
+//        int endIndex = startIndex + "Đăng ký".length();
+//        int endIndexForget = startIndexForget + "Lấy lại mật khẩu".length();
+//
+//        spannableString.setSpan(new StyleSpan(Typeface.BOLD), startIndex, endIndex, Spannable.SPAN_EXCLUSIVE_EXCLUSIVE);
+//        spannableString.setSpan(new ForegroundColorSpan(Color.parseColor("#462D48")), startIndex, endIndex, Spannable.SPAN_EXCLUSIVE_EXCLUSIVE);
+//        spannableString.setSpan(new AbsoluteSizeSpan(16, true), startIndex, endIndex, Spannable.SPAN_EXCLUSIVE_EXCLUSIVE);
+//
+//        spannableStringForget.setSpan(new StyleSpan(Typeface.BOLD), startIndexForget, endIndexForget, Spannable.SPAN_EXCLUSIVE_EXCLUSIVE);
+//        spannableStringForget.setSpan(new ForegroundColorSpan(Color.parseColor("#462D48")), startIndexForget, endIndexForget, Spannable.SPAN_EXCLUSIVE_EXCLUSIVE);
+//        spannableStringForget.setSpan(new AbsoluteSizeSpan(16, true), startIndexForget, endIndexForget, Spannable.SPAN_EXCLUSIVE_EXCLUSIVE);
+//        tvSignUp.setText(spannableString);
+//        tvForgetPassword.setText(spannableStringForget);
 
         loginViewModel.getLoginFormState().observe(this, new Observer<LoginFormState>() {
             @Override
@@ -158,58 +171,69 @@ public class LoginActivity extends AppCompatActivity {
                 String username = usernameEditText.getText().toString();
                 String password = passwordEditText.getText().toString();
 
-                // Create the login request object
-                LoginRequest loginRequest = new LoginRequest(username, password);
-
-                // Initialize Retrofit and call the login API
-                AuthService apiService = APIClient.getClient().create(AuthService.class);
-                Call<LoginResponse> call = apiService.login(loginRequest);
-
-                // Execute the API call asynchronously
-                call.enqueue(new Callback<LoginResponse>() {
-                    @Override
-                    public void onResponse(Call<LoginResponse> call, Response<LoginResponse> response) {
-                        loadingProgressBar.setVisibility(View.GONE);
-
-                        if (response.isSuccessful() && response.body() != null) {
-                            // Get the response body
-                            LoginResponse loginResponse = response.body();
-
-                            // Check the status of the response
-                            if (loginResponse.getStatus() == 200) {
-                                // Login is successful
-                                LoginResponse.LoginData loginData = loginResponse.getData();
-                                LoginResponse.User user = loginData.getUser();
-
-                                // Save the token if needed (for future API calls)
-                                String token = loginData.getToken();
-                                String refreshToken = loginData.getRefresh_token();
-
-                                // Update UI with user information
-                                updateUiWithUser(new LoggedInUserView(user.getFullName()));
-
-                                // Handle successful login (e.g., navigating to the next screen)
-                            } else {
-                                // Show an error message if login failed
-                                showLoginFailed(R.string.login_failed);
-                            }
-                        } else {
-                            // Handle unsuccessful login
-                            showLoginFailed(R.string.login_failed);
-                        }
-                    }
-
-                    @Override
-                    public void onFailure(Call<LoginResponse> call, Throwable t) {
-                        // Hide the loading indicator and show an error message
-                        loadingProgressBar.setVisibility(View.GONE);
-                        showLoginFailed(R.string.login_failed);
-                    }
-                });
+                loginViewModel.login(username,password);
+//                // Create the login request object
+//                LoginRequest loginRequest = new LoginRequest(username, password);
+//
+//                // Initialize Retrofit and call the login API
+//                AuthService apiService = APIClient.getClient().create(AuthService.class);
+//                Call<LoginResponse> call = apiService.login(loginRequest);
+//
+//                // Execute the API call asynchronously
+//                call.enqueue(new Callback<LoginResponse>() {
+//                    @Override
+//                    public void onResponse(Call<LoginResponse> call, Response<LoginResponse> response) {
+//                        loadingProgressBar.setVisibility(View.GONE);
+//
+//                        if (response.isSuccessful() && response.body() != null) {
+//                            // Get the response body
+//                            LoginResponse loginResponse = response.body();
+//
+//                            // Check the status of the response
+//                            if (loginResponse.getStatus() == 200) {
+//                                // Login is successful
+//                                LoginResponse.LoginData loginData = loginResponse.getData();
+//                                LoginResponse.User user = loginData.getUser();
+//
+//                                // Save the token if needed (for future API calls)
+//                                String token = loginData.getToken();
+//                                String refreshToken = loginData.getRefresh_token();
+//
+//                                // Update UI with user information
+//                                updateUiWithUser(new LoggedInUserView(user.getFullName()));
+//
+//                                // Handle successful login (e.g., navigating to the next screen)
+//                            } else {
+//                                // Show an error message if login failed
+//                                showLoginFailed(R.string.login_failed);
+//                            }
+//                        } else {
+//                            // Handle unsuccessful login
+//                            showLoginFailed(R.string.login_failed);
+//                        }
+//                    }
+//
+//                    @Override
+//                    public void onFailure(Call<LoginResponse> call, Throwable t) {
+//                        // Hide the loading indicator and show an error message
+//                        loadingProgressBar.setVisibility(View.GONE);
+//                        showLoginFailed(R.string.login_failed);
+//                    }
+//                });
             }
         });
 
 
+    }
+
+    private void setSpannableText(TextView textView, String text, String keyword) {
+        SpannableString spannableString = new SpannableString(text);
+        int startIndex = text.indexOf(keyword);
+        int endIndex = startIndex + keyword.length();
+        spannableString.setSpan(new StyleSpan(Typeface.BOLD), startIndex, endIndex, Spannable.SPAN_EXCLUSIVE_EXCLUSIVE);
+        spannableString.setSpan(new ForegroundColorSpan(Color.parseColor("#462D48")), startIndex, endIndex, Spannable.SPAN_EXCLUSIVE_EXCLUSIVE);
+        spannableString.setSpan(new AbsoluteSizeSpan(16, true), startIndex, endIndex, Spannable.SPAN_EXCLUSIVE_EXCLUSIVE);
+        textView.setText(spannableString);
     }
 
     private void updateUiWithUser(LoggedInUserView model) {
