@@ -1,4 +1,6 @@
-package fpt.edu.vn.asfsg1.response;
+package fpt.edu.vn.asfsg1.models.response;
+
+import com.google.gson.annotations.SerializedName;
 
 public class LoginResponse {
     private int status;
@@ -31,8 +33,12 @@ public class LoginResponse {
 
     public static class LoginData {
         private User user;
+
+        @SerializedName("token")
         private String token;
-        private String refresh_token;
+
+        @SerializedName("refresh_token")
+        private String refreshToken;
 
         public User getUser() {
             return user;
@@ -50,21 +56,30 @@ public class LoginResponse {
             this.token = token;
         }
 
-        public String getRefresh_token() {
-            return refresh_token;
+        public String getRefreshToken() {
+            return refreshToken;
         }
 
-        public void setRefresh_token(String refresh_token) {
-            this.refresh_token = refresh_token;
+        public void setRefreshToken(String refreshToken) {
+            this.refreshToken = refreshToken;
         }
     }
 
     public static class User {
+        private String id;
         private String fullName;
         private String email;
         private String avatar;
         private String role;
         private boolean status;
+
+        public String getId() {
+            return id;
+        }
+
+        public void setId(String id) {
+            this.id = id;
+        }
 
         public String getFullName() {
             return fullName;
@@ -105,5 +120,14 @@ public class LoginResponse {
         public void setStatus(boolean status) {
             this.status = status;
         }
+    }
+
+    @Override
+    public String toString() {
+        return "LoginResponse{" +
+                "status=" + status +
+                ", message='" + message + '\'' +
+                ", data=" + data +
+                '}';
     }
 }

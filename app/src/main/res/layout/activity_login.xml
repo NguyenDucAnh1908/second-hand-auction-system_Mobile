@@ -11,7 +11,7 @@
     android:paddingLeft="@dimen/activity_horizontal_margin"
     android:paddingRight="@dimen/activity_horizontal_margin"
     android:paddingTop="@dimen/activity_vertical_margin"
-    tools:context=".activity.data.login.LoginActivity">
+    tools:context=".activity.LoginActivity">
 
     <androidx.constraintlayout.widget.ConstraintLayout
         android:layout_width="match_parent"
@@ -109,7 +109,7 @@
                 android:fontFamily="@font/roboto_bold"
                 android:background="@drawable/green_bg"
                 android:backgroundTint="@color/background"
-                android:enabled="false"
+                android:enabled="true"
 
                 android:gravity="center"
                 android:text="@string/action_sign_in"

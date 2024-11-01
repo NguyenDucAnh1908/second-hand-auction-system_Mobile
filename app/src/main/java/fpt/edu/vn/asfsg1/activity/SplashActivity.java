@@ -8,16 +8,9 @@ import android.view.animation.Animation;
 import android.view.animation.AnimationUtils;
 import android.widget.ImageView;
 
-import androidx.activity.EdgeToEdge;
 import androidx.appcompat.app.AppCompatActivity;
-import androidx.core.graphics.Insets;
-import androidx.core.view.ViewCompat;
-import androidx.core.view.WindowInsetsCompat;
 
-import fpt.edu.vn.asfsg1.MainActivity;
 import fpt.edu.vn.asfsg1.R;
-import fpt.edu.vn.asfsg1.activity.data.login.LoginActivity;
-import fpt.edu.vn.asfsg1.databinding.ActivityLoginBinding;
 import fpt.edu.vn.asfsg1.databinding.ActivitySplashBinding;
 
 public class SplashActivity extends AppCompatActivity {

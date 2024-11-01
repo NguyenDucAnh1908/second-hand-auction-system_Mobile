@@ -1,4 +1,4 @@
-package fpt.edu.vn.asfsg1.ui.home;
+package fpt.edu.vn.asfsg1.ui.profile;
 
 import android.os.Bundle;
 import android.view.LayoutInflater;
@@ -11,24 +11,27 @@ import androidx.annotation.Nullable;
 import androidx.fragment.app.Fragment;
 import androidx.lifecycle.ViewModelProvider;
 
-import fpt.edu.vn.asfsg1.databinding.FragmentHomeBinding;
+import fpt.edu.vn.asfsg1.databinding.FragmentDashboardBinding;
+import fpt.edu.vn.asfsg1.databinding.FragmentProfileBinding;
 
-public class HomeFragment extends Fragment {
+public class ProfileFragment extends Fragment {
 
-    private FragmentHomeBinding binding;
+    private FragmentProfileBinding binding;
 
     @Nullable
     @Override
     public View onCreateView(@NonNull LayoutInflater inflater,
                              @Nullable ViewGroup container,
                              @Nullable Bundle savedInstanceState) {
-        HomeViewModel homeViewModel =
-                new ViewModelProvider(this).get(HomeViewModel.class);
+        ProfileViewModel dashboardViewModel =
+                new ViewModelProvider(this).get(ProfileViewModel.class);
 
         // Inflate the layout using ViewBinding
-        binding = FragmentHomeBinding.inflate(inflater, container, false);
+        binding = FragmentProfileBinding.inflate(inflater, container, false);
         View root = binding.getRoot();
 
+        final TextView textView = binding.textProfile;
+        dashboardViewModel.getText().observe(getViewLifecycleOwner(), textView::setText);
 
         return root;
     }

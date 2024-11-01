@@ -1,6 +1,6 @@
-package fpt.edu.vn.asfsg1.response;
+package fpt.edu.vn.asfsg1.models.response;
 
-public class RegisterResponse {
+public class VerifyUserResponse {
     private int status;
     private String message;
     private Object data;

@@ -1,4 +1,4 @@
-package fpt.edu.vn.asfsg1.request;
+package fpt.edu.vn.asfsg1.models.request;
 
 public class VerifyUserRequest {
     private String email;
