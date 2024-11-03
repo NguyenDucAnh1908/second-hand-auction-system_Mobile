@@ -1,0 +1,29 @@
+{
+  "project_info": {
+    "project_number": "110853141742",
+    "project_id": "asfsg-538c3",
+    "storage_bucket": "asfsg-538c3.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:110853141742:android:056151cda71d8db7f9afff",
+        "android_client_info": {
+          "package_name": "fpt.edu.vn.asfsg1"
+        }
+      },
+      "oauth_client": [],
+      "api_key": [
+        {
+          "current_key": "AIzaSyDODef3J0smW9cUpgHtR6RYtDQAIOKJT8E"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": []
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}

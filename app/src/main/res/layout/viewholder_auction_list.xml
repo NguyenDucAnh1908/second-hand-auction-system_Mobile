@@ -1,0 +1,142 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="175dp"
+    android:layout_height="275dp"
+    android:layout_margin="8dp"
+    android:background="@color/background"
+    android:elevation="3dp">
+
+    <com.google.android.material.imageview.ShapeableImageView
+        android:id="@+id/pic"
+        android:layout_width="175dp"
+        android:layout_height="155dp"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent"
+        tools:srcCompat="@tools:sample/avatars" />
+
+    <View
+        android:id="@+id/view"
+        android:layout_width="wrap_content"
+        android:layout_height="0dp"
+        android:background="@drawable/white_background"
+        app:layout_constraintTop_toBottomOf="@+id/pic"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintBottom_toBottomOf="parent"
+        />
+
+    <TextView
+        android:id="@+id/tvSubCate"
+        android:layout_width="0dp"
+        android:layout_height="24dp"
+        android:text="sub_cate"
+        android:fontFamily="@font/roboto_regular"
+        android:paddingStart="10sp"
+        android:textSize="12sp"
+        android:layout_marginTop="5dp"
+        android:textColor="@color/black"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="@id/pic"
+        app:layout_constraintTop_toBottomOf="@id/pic"/>
+
+    <TextView
+        android:id="@+id/title"
+        android:layout_width="0dp"
+        android:layout_height="24dp"
+        android:text="title"
+        android:layout_marginEnd="8dp"
+        android:paddingStart="10sp"
+        android:textSize="12sp"
+        android:fontFamily="@font/roboto_regular"
+        android:textColor="@color/black"
+        android:textStyle="bold"
+        android:lines="2"
+        android:maxLines="2"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="@id/tvSubCate"
+        app:layout_constraintTop_toBottomOf="@id/tvSubCate"/>
+
+    <LinearLayout
+        android:id="@+id/rating"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:orientation="horizontal"
+        app:layout_constraintStart_toStartOf="@id/title"
+        app:layout_constraintTop_toBottomOf="@id/title">
+
+        <ImageView
+            android:layout_width="10dp"
+            android:layout_height="10dp"
+            android:layout_gravity="center"
+            android:src="@drawable/star"
+            android:layout_marginStart="10dp"
+            android:layout_marginEnd="4dp"/>
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:textSize="10sp"
+            android:textColor="@color/black"
+            android:fontFamily="@font/roboto_regular"
+            android:layout_gravity="center"
+            android:text="4.3"/>
+
+    </LinearLayout>
+
+    <LinearLayout
+        android:id="@+id/startPrice"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:orientation="horizontal"
+        android:layout_marginTop="5dp"
+        app:layout_constraintStart_toStartOf="@id/rating"
+        app:layout_constraintTop_toBottomOf="@id/rating">
+
+        <TextView
+            android:id="@+id/tvStartPrice"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="8dp"
+            android:text="Giá khởi điểm: "
+            android:layout_gravity="center"
+            android:fontFamily="@font/roboto_regular"
+            android:textColor="@color/black"
+            android:textSize="12sp"/>
+
+        <TextView
+            android:id="@+id/priceTxt"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="8dp"
+            android:text="300000VNĐ"
+            android:textColor="@color/black"
+            android:fontFamily="@font/roboto_regular"
+            android:layout_gravity="center"
+            android:textSize="13sp"
+            android:textStyle="bold" />
+    </LinearLayout>
+
+    <TextView
+        android:id="@+id/btnDeposit"
+        android:layout_width="match_parent"
+        android:layout_height="20dp"
+        android:text="Tham gia đấu giá"
+        android:background="@drawable/green_bg"
+        android:gravity="center"
+        android:fontFamily="@font/roboto_bold"
+        android:backgroundTint="@color/background"
+        android:textColor="@color/black"
+        android:layout_gravity="center_horizontal"
+        android:textSize="12sp"
+        android:enabled="true"
+        android:layout_marginLeft="10dp"
+        android:layout_marginTop="5dp"
+        android:layout_marginRight="10dp"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@id/startPrice"/>
+
+</androidx.constraintlayout.widget.ConstraintLayout>

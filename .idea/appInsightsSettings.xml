@@ -8,10 +8,10 @@
             <InsightsFilterSettings>
               <option name="connection">
                 <ConnectionSetting>
-                  <option name="appId" value="PLACEHOLDER" />
-                  <option name="mobileSdkAppId" value="" />
-                  <option name="projectId" value="" />
-                  <option name="projectNumber" value="" />
+                  <option name="appId" value="fpt.edu.vn.asfsg1" />
+                  <option name="mobileSdkAppId" value="1:110853141742:android:056151cda71d8db7f9afff" />
+                  <option name="projectId" value="asfsg-538c3" />
+                  <option name="projectNumber" value="110853141742" />
                 </ConnectionSetting>
               </option>
               <option name="signal" value="SIGNAL_UNSPECIFIED" />
