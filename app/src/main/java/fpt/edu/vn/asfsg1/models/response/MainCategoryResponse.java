@@ -1,49 +1,87 @@
 package fpt.edu.vn.asfsg1.models.response;
 
+import com.google.gson.annotations.SerializedName;
+
+import java.util.List;
+
 public class MainCategoryResponse {
-    private int mainCategoryId;
-    private String categoryName;
-    private String description;
-    private String iconUrl;
 
-    public MainCategoryResponse() {
-    }
+    private String message;
+    private String status;
+    private List<MainCategoryData> data;
 
-    public MainCategoryResponse(Integer mainCategoryId, String categoryName, String description, String iconUrl) {
-        this.mainCategoryId = mainCategoryId;
-        this.categoryName = categoryName;
-        this.description = description;
-        this.iconUrl = iconUrl;
-    }
-    public int getMainCategoryId() {
-        return mainCategoryId;
+    public String getMessage() {
+        return message;
     }
 
-    public void setMainCategoryId(Integer mainCategoryId) {
-        this.mainCategoryId = mainCategoryId;
+    public void setMessage(String message) {
+        this.message = message;
     }
 
-    public String getCategoryName() {
-        return categoryName;
+    public String getStatus() {
+        return status;
     }
 
-    public void setCategoryName(String categoryName) {
-        this.categoryName = categoryName;
+    public void setStatus(String status) {
+        this.status = status;
     }
 
-    public String getDescription() {
-        return description;
+    public List<MainCategoryData> getData() {
+        return data;
     }
 
-    public void setDescription(String description) {
-        this.description = description;
+    public void setData(List<MainCategoryData> data) {
+        this.data = data;
     }
 
-    public String getIconUrl() {
-        return iconUrl;
+    public boolean isValid() {
+        return "success".equals(status) && data != null && !data.isEmpty();
     }
 
-    public void setIconUrl(String iconUrl) {
-        this.iconUrl = iconUrl;
+    public static class MainCategoryData {
+        @SerializedName("main_category_id")
+        private int mainCategoryId;
+
+        @SerializedName("category_name")
+        private String categoryName;
+
+        @SerializedName("description")
+        private String description;
+
+        @SerializedName("icon_url")
+        private String iconUrl;
+
+        public int getMainCategoryId() {
+            return mainCategoryId;
+        }
+
+        public void setMainCategoryId(int mainCategoryId) {
+            this.mainCategoryId = mainCategoryId;
+        }
+
+        public String getCategoryName() {
+            return categoryName;
+        }
+
+        public void setCategoryName(String categoryName) {
+            this.categoryName = categoryName;
+        }
+
+        public String getDescription() {
+            return description;
+        }
+
+        public void setDescription(String description) {
+            this.description = description;
+        }
+
+        public String getIconUrl() {
+            return iconUrl;
+        }
+
+        public void setIconUrl(String iconUrl) {
+            this.iconUrl = iconUrl;
+        }
     }
+
 }

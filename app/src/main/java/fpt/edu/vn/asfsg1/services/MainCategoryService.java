@@ -16,7 +16,10 @@ public interface MainCategoryService {
     String MAIN_CATEGORY = "main-category";
 
     @GET(MAIN_CATEGORY)
-    Call<List<MainCategoryResponse>> getMainCategories();
+    Call<List<MainCategoryResponse>> getMain_SubCategories();
+
+    @GET(MAIN_CATEGORY + "/get-main")
+    Call<MainCategoryResponse> getMainCategories();
 
     @GET(MAIN_CATEGORY + "/{id}")
     Call<MainCategoryResponse> getMainCategoryById(@Path("id") int id);

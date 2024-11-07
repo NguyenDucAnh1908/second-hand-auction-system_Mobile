@@ -1,4 +1,4 @@
-package fpt.edu.vn.asfsg1.ui.dashboard;
+package fpt.edu.vn.asfsg1.ui.auction;
 
 import android.os.Bundle;
 import android.view.LayoutInflater;
@@ -11,26 +11,22 @@ import androidx.annotation.Nullable;
 import androidx.fragment.app.Fragment;
 import androidx.lifecycle.ViewModelProvider;
 
-import fpt.edu.vn.asfsg1.databinding.FragmentDashboardBinding;
+import fpt.edu.vn.asfsg1.databinding.FragmentAuctionBinding;
 
-public class DashboardFragment extends Fragment {
+public class AuctionFragment extends Fragment {
 
-    private FragmentDashboardBinding binding;
+    private FragmentAuctionBinding binding;
 
     @Nullable
     @Override
     public View onCreateView(@NonNull LayoutInflater inflater,
                              @Nullable ViewGroup container,
                              @Nullable Bundle savedInstanceState) {
-        DashboardViewModel dashboardViewModel =
-                new ViewModelProvider(this).get(DashboardViewModel.class);
 
         // Inflate the layout using ViewBinding
-        binding = FragmentDashboardBinding.inflate(inflater, container, false);
+        binding = FragmentAuctionBinding.inflate(inflater, container, false);
         View root = binding.getRoot();
 
-        final TextView textView = binding.textDashboard;
-        dashboardViewModel.getText().observe(getViewLifecycleOwner(), textView::setText);
 
         return root;
     }

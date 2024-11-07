@@ -16,9 +16,9 @@ import fpt.edu.vn.asfsg1.databinding.ViewholderCategoryBinding;
 import fpt.edu.vn.asfsg1.models.response.MainCategoryResponse;
 
 public class CategoryAdapter extends RecyclerView.Adapter<CategoryAdapter.Viewholder> {
-    private List<MainCategoryResponse> categoryItems; // Danh sách các danh mục
+    private List<MainCategoryResponse.MainCategoryData> categoryItems; // Danh sách các danh mục
 
-    public CategoryAdapter(List<MainCategoryResponse> categoryItems) { // Nhận vào danh sách
+    public CategoryAdapter(List<MainCategoryResponse.MainCategoryData> categoryItems) { // Nhận vào danh sách
         this.categoryItems = categoryItems;
     }
 
@@ -31,7 +31,7 @@ public class CategoryAdapter extends RecyclerView.Adapter<CategoryAdapter.Viewho
 
     @Override
     public void onBindViewHolder(@NonNull CategoryAdapter.Viewholder holder, int position) {
-        MainCategoryResponse category = categoryItems.get(position);
+        MainCategoryResponse.MainCategoryData category = categoryItems.get(position);
         holder.binding.title.setText(category.getCategoryName());
 
         Glide.with(holder.binding.pic.getContext())
@@ -41,7 +41,7 @@ public class CategoryAdapter extends RecyclerView.Adapter<CategoryAdapter.Viewho
 
     @Override
     public int getItemCount() {
-        return categoryItems.size();
+        return categoryItems != null ? categoryItems.size() : 0;
     }
 
     public class Viewholder extends RecyclerView.ViewHolder {
@@ -51,5 +51,10 @@ public class CategoryAdapter extends RecyclerView.Adapter<CategoryAdapter.Viewho
             super(binding.getRoot());
             this.binding = binding;
         }
+    }
+
+    public void updateCategories(List<MainCategoryResponse.MainCategoryData> newCategoryItems) {
+        this.categoryItems = newCategoryItems;
+        notifyDataSetChanged(); // Notify adapter about data changes
     }
 }

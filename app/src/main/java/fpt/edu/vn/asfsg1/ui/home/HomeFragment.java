@@ -1,5 +1,6 @@
 package fpt.edu.vn.asfsg1.ui.home;
 
+import android.content.Intent;
 import android.os.Bundle;
 import android.util.Log;
 import android.view.LayoutInflater;
@@ -14,6 +15,7 @@ import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
 import androidx.fragment.app.Fragment;
 import androidx.lifecycle.ViewModelProvider;
+import androidx.recyclerview.widget.GridLayoutManager;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 import androidx.viewpager2.widget.CompositePageTransformer;
@@ -28,12 +30,20 @@ import com.google.firebase.database.ValueEventListener;
 import java.util.ArrayList;
 import java.util.List;
 
+import fpt.edu.vn.asfsg1.R;
+import fpt.edu.vn.asfsg1.activity.ChatActivity;
+import fpt.edu.vn.asfsg1.activity.MainActivity;
+import fpt.edu.vn.asfsg1.activity.WishlistActivity;
 import fpt.edu.vn.asfsg1.adapter.CategoryAdapter;
+import fpt.edu.vn.asfsg1.adapter.ItemAdapter;
 import fpt.edu.vn.asfsg1.adapter.SliderAdapter;
 import fpt.edu.vn.asfsg1.databinding.FragmentHomeBinding;
 import fpt.edu.vn.asfsg1.domains.SliderItemsDomain;
+import fpt.edu.vn.asfsg1.helper.ItemRepository;
 import fpt.edu.vn.asfsg1.helper.MainCategoryRepository;
+import fpt.edu.vn.asfsg1.models.response.ItemResponse;
 import fpt.edu.vn.asfsg1.models.response.MainCategoryResponse;
+import fpt.edu.vn.asfsg1.services.ItemService;
 import fpt.edu.vn.asfsg1.services.MainCategoryService;
 import retrofit2.Call;
 import retrofit2.Callback;
@@ -43,7 +53,9 @@ public class HomeFragment extends Fragment {
 
     private FragmentHomeBinding binding;
     private MainCategoryService mainCategoryService;
-    private ArrayList<MainCategoryResponse> categoryItems;
+    private ItemService itemService;
+    private ArrayList<MainCategoryResponse.MainCategoryData> categoryItems;
+    private boolean categoriesLoaded = false;
 
     public HomeFragment() {
     }
@@ -57,24 +69,31 @@ public class HomeFragment extends Fragment {
         binding = FragmentHomeBinding.inflate(inflater, container, false);
         View root = binding.getRoot();
         mainCategoryService = MainCategoryRepository.getMainCategoryService();
+        itemService = ItemRepository.getItemService();
+        
+        initTopNav();
+        initBanner();
+        initMainCategory();
+        initPopular();
+
+        return root;
+    }
+
+    private void initTopNav() {
         EditText etSearch = binding.etSearch;
         ImageView wishlist = binding.wishlist;
-        View btnCart = binding.btnCart;
+        View btnChat = binding.btnChat;
         TextView tvNotify = binding.tvNotify;
 
         wishlist.setOnClickListener(v -> {
-            // Handle wishlist click
+            Intent intent = new Intent(getActivity(), WishlistActivity.class); //Chuyển từ Fragment Bottom Nav qua Wishlist
+            startActivity(intent);
         });
 
-        // Example for cart button click event
-        btnCart.setOnClickListener(v -> {
-            // Handle cart button click
+        btnChat.setOnClickListener(v -> {
+            Intent intent = new Intent(getActivity(), ChatActivity.class); //Chuyển từ Fragment Bottom Nav qua Chat
+            startActivity(intent);
         });
-
-        initMainCategory();
-        initBanner();
-
-        return root;
     }
 
     private void initBanner() {
@@ -117,34 +136,69 @@ public class HomeFragment extends Fragment {
 
     private void initMainCategory() {
         binding.progressBarOfficial.setVisibility(View.VISIBLE);
-        categoryItems = new ArrayList<>(); // Khởi tạo danh sách các danh mục
+        ArrayList<MainCategoryResponse.MainCategoryData> categoryItems = new ArrayList<>(); // Khởi tạo danh sách các danh mục
 
-        mainCategoryService.getMainCategories().enqueue(new Callback<List<MainCategoryResponse>>() {
+        mainCategoryService.getMainCategories().enqueue(new Callback<MainCategoryResponse>() {
             @Override
-            public void onResponse(Call<List<MainCategoryResponse>> call, Response<List<MainCategoryResponse>> response) {
-//                binding.progressBarOfficial.setVisibility(View.GONE); // Ẩn progress bar ngay khi có phản hồi
-//                if (response.isSuccessful() && response.body() != null) {
-//                    categoryItems.addAll(response.body()); // Thêm tất cả danh mục vào danh sách
-//                    setupRecyclerView(categoryItems); // Gọi phương thức setupRecyclerView với danh sách
-//                } else {
-//                    Toast.makeText(getContext(), "Failed to load categories", Toast.LENGTH_SHORT).show();
-//                }
+            public void onResponse(Call<MainCategoryResponse> call, Response<MainCategoryResponse> response) {
+                if (response.isSuccessful() && response.body() != null) {
+                    List<MainCategoryResponse.MainCategoryData> data = response.body().getData();
+                    if (data != null) {
+                        categoryItems.addAll(data);
+                        if(!categoryItems.isEmpty()){
+                            binding.recyclerViewOfficial.setLayoutManager(new LinearLayoutManager(getContext(), RecyclerView.HORIZONTAL, false));
+                            binding.recyclerViewOfficial.setAdapter(new CategoryAdapter(categoryItems));
+                        }
+                        binding.progressBarOfficial.setVisibility(View.GONE);
+                    } else {
+                        Toast.makeText(getContext(), "No categories found", Toast.LENGTH_SHORT).show();
+                    }
+                } else {
+                    Toast.makeText(getContext(), "Failed to load categories", Toast.LENGTH_SHORT).show();
+                }
             }
 
             @Override
-            public void onFailure(Call<List<MainCategoryResponse>> call, Throwable t) {
-//                binding.progressBarOfficial.setVisibility(View.GONE);
-//                Toast.makeText(getContext(), "Error: " + t.getMessage(), Toast.LENGTH_SHORT).show();
-//                Log.e("HomeFragment", "Error fetching categories", t);
+            public void onFailure(Call<MainCategoryResponse> call, Throwable t) {
+                binding.progressBarOfficial.setVisibility(View.GONE);
+                Toast.makeText(getContext(), "Error: " + t.getMessage(), Toast.LENGTH_SHORT).show();
+                Log.e("HomeFragment", "Error fetching categories", t);
             }
         });
     }
 
-//    private void setupRecyclerView(ArrayList<MainCategoryResponse> categoryItems) {
-//        CategoryAdapter adapter = new CategoryAdapter(categoryItems); // Truyền vào danh sách
-//        binding.recyclerViewPopular.setLayoutManager(new LinearLayoutManager(getContext(), RecyclerView.HORIZONTAL, false));
-//        binding.recyclerViewPopular.setAdapter(adapter);
-//    }
+    private void initPopular() {
+        binding.progressBarPopular.setVisibility(View.VISIBLE);
+        ArrayList<ItemResponse.Item> popularItems = new ArrayList<>();
+        itemService.getTop10FeaturedItem().enqueue(new Callback<ItemResponse>() {
+            @Override
+            public void onResponse(Call<ItemResponse> call, Response<ItemResponse> response) {
+                if (response.isSuccessful() && response.body() != null) {
+                    List<ItemResponse.Item> data = response.body().getData();
+                    if (data != null) {
+                        popularItems.addAll(data);
+                        if(!popularItems.isEmpty()){
+                            binding.recyclerViewPopular.setLayoutManager(new GridLayoutManager(getContext(), 2));
+                            binding.recyclerViewPopular.setAdapter(new ItemAdapter(popularItems));
+                        }
+                        binding.progressBarPopular.setVisibility(View.GONE);
+                    } else {
+                        Toast.makeText(getContext(), "Không tìm thấy sản phẩm", Toast.LENGTH_SHORT).show();
+                    }
+                } else {
+                    Toast.makeText(getContext(), "Không load được sản phẩm", Toast.LENGTH_SHORT).show();
+                }
+            }
+
+            @Override
+            public void onFailure(Call<ItemResponse> call, Throwable t) {
+                binding.progressBarPopular.setVisibility(View.GONE);
+                Toast.makeText(getContext(), "Error: " + t.getMessage(), Toast.LENGTH_SHORT).show();
+                Log.e("HomeFragment", "Error fetching item", t);
+            }
+        });
+
+    }
 
     @Override
     public void onDestroyView() {

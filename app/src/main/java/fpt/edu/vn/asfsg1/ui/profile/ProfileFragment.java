@@ -11,7 +11,6 @@ import androidx.annotation.Nullable;
 import androidx.fragment.app.Fragment;
 import androidx.lifecycle.ViewModelProvider;
 
-import fpt.edu.vn.asfsg1.databinding.FragmentDashboardBinding;
 import fpt.edu.vn.asfsg1.databinding.FragmentProfileBinding;
 
 public class ProfileFragment extends Fragment {
