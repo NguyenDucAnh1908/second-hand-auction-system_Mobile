@@ -13,4 +13,8 @@
         <item name="android:statusBarColor">@color/text</item>
         <!-- Customize your theme here. -->
     </style>
+
+    <style name="CircleImageView" parent="Widget.MaterialComponents.ShapeableImageView">
+        <item name="shapeAppearanceOverlay">@style/ShapeAppearanceOverlay.MaterialComponents.Circular</item>
+    </style>
 </resources>

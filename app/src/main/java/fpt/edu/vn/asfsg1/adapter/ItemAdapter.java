@@ -36,6 +36,9 @@ public class ItemAdapter extends RecyclerView.Adapter<ItemAdapter.Viewholder>{
         // Thiết lập các thuộc tính cho các TextView
         holder.binding.tvSubCate.setText(item.getScId().getSub_category());
         holder.binding.title.setText(item.getItemName());
+        holder.binding.btnDeposit.setOnClickListener(v -> {
+
+        });
 
         // Giả sử bạn có giá khởi điểm và đánh giá từ các thuộc tính khác
         holder.binding.priceTxt.setText("Chưa có"); // Thay thế bằng giá thực tế từ item
