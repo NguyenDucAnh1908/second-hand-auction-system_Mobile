@@ -8,14 +8,8 @@
     <fragment
         android:id="@+id/navigation_home"
         android:name="fpt.edu.vn.asfsg1.ui.home.HomeFragment"
-        android:label="@string/title_home"
-        tools:layout="@layout/fragment_home" />
-
-    <fragment
-        android:id="@+id/navigation_auction"
-        android:name="fpt.edu.vn.asfsg1.ui.auction.AuctionFragment"
         android:label="@string/title_auction"
-        tools:layout="@layout/fragment_auction" />
+        tools:layout="@layout/fragment_home" />
 
     <fragment
         android:id="@+id/navigation_notifications"

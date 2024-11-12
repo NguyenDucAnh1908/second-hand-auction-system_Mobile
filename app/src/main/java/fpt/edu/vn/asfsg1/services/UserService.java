@@ -14,4 +14,7 @@ public interface UserService {
 
     @GET("get-users")
     Call<UserResponse> getUsers(@Header("Authorization") String token, @Query("search") String search);
+
+    @GET(USER)
+    Call<UserResponse> getUser();
 }

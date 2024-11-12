@@ -1,10 +1,16 @@
 package fpt.edu.vn.asfsg1.activity;
 
 import android.content.Intent;
+import android.content.SharedPreferences;
 import android.graphics.Color;
 import android.graphics.Typeface;
+import android.os.Build;
 import android.os.Bundle;
+
+import androidx.activity.OnBackPressedCallback;
 import androidx.appcompat.app.AppCompatActivity;
+
+import android.os.Handler;
 import android.text.Editable;
 import android.text.Spannable;
 import android.text.SpannableString;
@@ -19,6 +25,8 @@ import android.widget.EditText;
 import android.widget.ProgressBar;
 import android.widget.TextView;
 import android.widget.Toast;
+import android.window.OnBackInvokedCallback;
+
 import org.json.JSONException;
 import org.json.JSONObject;
 import fpt.edu.vn.asfsg1.databinding.ActivityLoginBinding;
@@ -35,6 +43,7 @@ public class LoginActivity extends AppCompatActivity {
 
     private ActivityLoginBinding binding;
     private AuthService authService;
+    private boolean doubleBackToExitPressedOnce = false;
 
     @Override
     public void onCreate(Bundle savedInstanceState) {
@@ -45,6 +54,7 @@ public class LoginActivity extends AppCompatActivity {
 
         authService = AuthRepository.getAuthService();
         initializeUI();
+        setupBackNavigation();
     }
 
     private void initializeUI() {
@@ -97,9 +107,18 @@ public class LoginActivity extends AppCompatActivity {
 
     private void handleLoginSuccess(LoginResponse loginResponse) {
         if (loginResponse.getStatus() == 200) {
-            Toast.makeText(this, "Đăng nhập thành công", Toast.LENGTH_SHORT).show();
-            saveLoginDetails(loginResponse);
-            navigateToMainActivity();
+            if (loginResponse.getData().getUser().getRole().equals("BUYER")){
+                Toast.makeText(this, "Chào " + loginResponse.getData().getUser().getFullName(), Toast.LENGTH_SHORT).show();
+                saveLoginDetails(loginResponse);
+                navigateToMainActivity();
+            } else if (loginResponse.getData().getUser().getRole().equals("SELLER")) {
+                Toast.makeText(this, "Chào " + loginResponse.getData().getUser().getFullName(), Toast.LENGTH_SHORT).show();
+                saveLoginDetails(loginResponse);
+                navigateToMainActivity();
+            } else {
+                Toast.makeText(this, "Chỉ dùng tài khoản người BUYER và SELLER trên app", Toast.LENGTH_SHORT).show();
+            }
+
         } else {
             Toast.makeText(this, loginResponse.getMessage(), Toast.LENGTH_SHORT).show();
         }
@@ -121,7 +140,9 @@ public class LoginActivity extends AppCompatActivity {
     private void saveLoginDetails(LoginResponse loginResponse) {
         TokenManager.setToken(loginResponse.getData().getToken());
         TokenManager.setId_user(loginResponse.getData().getUser().getId());
-        TokenManager.setUserObject(createUserJSONObject(loginResponse));
+        JSONObject userObject = createUserJSONObject(loginResponse);
+        SharedPreferences preferences = getSharedPreferences("userPrefs", MODE_PRIVATE);
+        preferences.edit().putString("userObject", userObject.toString()).apply();
     }
 
     private JSONObject createUserJSONObject(LoginResponse loginResponse) {
@@ -197,6 +218,7 @@ public class LoginActivity extends AppCompatActivity {
 
     private void navigateToSignUp() {
         Intent intent = new Intent(LoginActivity.this, SignUpActivity.class);
+
         startActivity(intent);
         finish();
     }
@@ -206,4 +228,35 @@ public class LoginActivity extends AppCompatActivity {
         startActivity(intent);
         finish();
     }
+
+    private void setupBackNavigation() {
+        if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.TIRAMISU) {
+            getOnBackInvokedDispatcher().registerOnBackInvokedCallback(
+                    /* priority */ 0,
+                    () -> showExitConfirmation()
+            );
+        } else {
+            // For older versions
+            getOnBackPressedDispatcher().addCallback(this, new OnBackPressedCallback(true) {
+                @Override
+                public void handleOnBackPressed() {
+                    showExitConfirmation();
+                }
+            });
+        }
+    }
+
+    private void showExitConfirmation() {
+        if (doubleBackToExitPressedOnce) {
+            finish();
+            return;
+        }
+
+        this.doubleBackToExitPressedOnce = true;
+        Toast.makeText(this, "Nhấn lần nữa để thoát", Toast.LENGTH_SHORT).show();
+
+        // Reset after 2 seconds
+        new Handler().postDelayed(() -> doubleBackToExitPressedOnce = false, 2000);
+    }
+
 }

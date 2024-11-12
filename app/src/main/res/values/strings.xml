@@ -2,7 +2,9 @@
     <string name="app_name">ASFSG1</string>
     <string name="title_home">Trang chủ</string>
     <string name="title_dashboard">Dashboard</string>
-    <string name="title_auction">Phiên đấu giá</string>
+    <string name="title_auction">Đấu giá</string>
+    <string name="title_auction_tpi">Tham gia đấu giá</string>
+    <string name="title_list_auctioner">Phiên đấu giá</string>
     <string name="title_notifications">Thông báo</string>
     <string name="title_activity_login">LoginActivity</string>
     <string name="prompt_email">Email</string>

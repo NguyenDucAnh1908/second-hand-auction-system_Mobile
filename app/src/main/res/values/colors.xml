@@ -13,4 +13,5 @@
     <color name="grey">#d2d2d2</color>
     <color name="background">#F7E8C7</color>
     <color name="text">#462D48</color>
+    <color name="alert">#D0342C</color>
 </resources>

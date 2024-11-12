@@ -29,4 +29,7 @@ public interface AuthService {
             @Query("email") String email,
             @Query("otp") String otp
     );
+
+    @POST(AUTH + "/logout")
+    Call<LoginResponse> logout();
 }

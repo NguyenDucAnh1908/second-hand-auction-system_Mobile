@@ -3,7 +3,7 @@
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="175dp"
-    android:layout_height="275dp"
+    android:layout_height="290dp"
     android:layout_margin="8dp"
     android:background="@color/background"
     android:elevation="3dp">
@@ -67,22 +67,28 @@
         app:layout_constraintStart_toStartOf="@id/title"
         app:layout_constraintTop_toBottomOf="@id/title">
 
-        <ImageView
-            android:layout_width="10dp"
-            android:layout_height="10dp"
-            android:layout_gravity="center"
-            android:src="@drawable/star"
-            android:layout_marginStart="10dp"
-            android:layout_marginEnd="4dp"/>
-
         <TextView
+            android:id="@+id/timeStatus"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:textSize="10sp"
-            android:textColor="@color/black"
+            android:layout_marginStart="5dp"
+            android:textColor="@color/green"
             android:fontFamily="@font/roboto_regular"
             android:layout_gravity="center"
-            android:text="4.3"/>
+            android:text="Đang diễn ra: "/>
+
+        <TextView
+            android:id="@+id/timeCountdown"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:textSize="10sp"
+            android:layout_marginStart="5dp"
+            android:layout_marginEnd="5dp"
+            android:textColor="@color/green"
+            android:fontFamily="@font/roboto_regular"
+            android:layout_gravity="center"
+            android:text="Còn 51 ngày, 21:20:54"/>
 
     </LinearLayout>
 
@@ -99,7 +105,7 @@
             android:id="@+id/tvStartPrice"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:layout_marginStart="8dp"
+            android:layout_marginStart="10dp"
             android:text="Giá khởi điểm: "
             android:layout_gravity="center"
             android:fontFamily="@font/roboto_regular"
@@ -133,7 +139,7 @@
         android:textSize="12sp"
         android:enabled="true"
         android:layout_marginLeft="10dp"
-        android:layout_marginTop="5dp"
+        android:layout_marginTop="10dp"
         android:layout_marginRight="10dp"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"

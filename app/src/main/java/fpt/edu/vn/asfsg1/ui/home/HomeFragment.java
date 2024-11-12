@@ -34,15 +34,19 @@ import fpt.edu.vn.asfsg1.R;
 import fpt.edu.vn.asfsg1.activity.ChatActivity;
 import fpt.edu.vn.asfsg1.activity.MainActivity;
 import fpt.edu.vn.asfsg1.activity.WishlistActivity;
+import fpt.edu.vn.asfsg1.adapter.AuctionAdapter;
 import fpt.edu.vn.asfsg1.adapter.CategoryAdapter;
 import fpt.edu.vn.asfsg1.adapter.ItemAdapter;
 import fpt.edu.vn.asfsg1.adapter.SliderAdapter;
 import fpt.edu.vn.asfsg1.databinding.FragmentHomeBinding;
 import fpt.edu.vn.asfsg1.domains.SliderItemsDomain;
+import fpt.edu.vn.asfsg1.helper.AuctionRepository;
 import fpt.edu.vn.asfsg1.helper.ItemRepository;
 import fpt.edu.vn.asfsg1.helper.MainCategoryRepository;
+import fpt.edu.vn.asfsg1.models.response.AuctionListResponse;
 import fpt.edu.vn.asfsg1.models.response.ItemResponse;
 import fpt.edu.vn.asfsg1.models.response.MainCategoryResponse;
+import fpt.edu.vn.asfsg1.services.AuctionService;
 import fpt.edu.vn.asfsg1.services.ItemService;
 import fpt.edu.vn.asfsg1.services.MainCategoryService;
 import retrofit2.Call;
@@ -55,7 +59,7 @@ public class HomeFragment extends Fragment {
     private MainCategoryService mainCategoryService;
     private ItemService itemService;
     private ArrayList<MainCategoryResponse.MainCategoryData> categoryItems;
-    private boolean categoriesLoaded = false;
+    private AuctionService auctionService;
 
     public HomeFragment() {
     }
@@ -70,6 +74,7 @@ public class HomeFragment extends Fragment {
         View root = binding.getRoot();
         mainCategoryService = MainCategoryRepository.getMainCategoryService();
         itemService = ItemRepository.getItemService();
+        auctionService = AuctionRepository.getAuctionService();
         
         initTopNav();
         initBanner();
@@ -169,35 +174,37 @@ public class HomeFragment extends Fragment {
 
     private void initPopular() {
         binding.progressBarPopular.setVisibility(View.VISIBLE);
-        ArrayList<ItemResponse.Item> popularItems = new ArrayList<>();
-        itemService.getTop10FeaturedItem().enqueue(new Callback<ItemResponse>() {
+        ArrayList<AuctionListResponse.AuctionItem> popularItems = new ArrayList<>();
+        itemService.getAuctionList().enqueue(new Callback<AuctionListResponse>() {
             @Override
-            public void onResponse(Call<ItemResponse> call, Response<ItemResponse> response) {
+            public void onResponse(Call<AuctionListResponse> call, Response<AuctionListResponse> response) {
                 if (response.isSuccessful() && response.body() != null) {
-                    List<ItemResponse.Item> data = response.body().getData();
-                    if (data != null) {
-                        popularItems.addAll(data);
-                        if(!popularItems.isEmpty()){
+                    // Extracting data from the AuctionListResponse
+                    AuctionListResponse.AuctionListData auctionListData = response.body().getData();
+                    if (auctionListData != null) {
+                        List<AuctionListResponse.AuctionItem> data = auctionListData.getData(); // Correct method to get the list of AuctionItem
+                        if (data != null && !data.isEmpty()) {
+                            popularItems.addAll(data);
                             binding.recyclerViewPopular.setLayoutManager(new GridLayoutManager(getContext(), 2));
-                            binding.recyclerViewPopular.setAdapter(new ItemAdapter(popularItems));
+                            binding.recyclerViewPopular.setAdapter(new AuctionAdapter(popularItems, itemService));
+                        } else {
+                            Toast.makeText(getContext(), "Không tìm thấy sản phẩm", Toast.LENGTH_SHORT).show();
                         }
-                        binding.progressBarPopular.setVisibility(View.GONE);
-                    } else {
-                        Toast.makeText(getContext(), "Không tìm thấy sản phẩm", Toast.LENGTH_SHORT).show();
                     }
+                    binding.progressBarPopular.setVisibility(View.GONE);
                 } else {
                     Toast.makeText(getContext(), "Không load được sản phẩm", Toast.LENGTH_SHORT).show();
+                    binding.progressBarPopular.setVisibility(View.GONE);
                 }
             }
 
             @Override
-            public void onFailure(Call<ItemResponse> call, Throwable t) {
+            public void onFailure(Call<AuctionListResponse> call, Throwable t) {
                 binding.progressBarPopular.setVisibility(View.GONE);
                 Toast.makeText(getContext(), "Error: " + t.getMessage(), Toast.LENGTH_SHORT).show();
                 Log.e("HomeFragment", "Error fetching item", t);
             }
         });
-
     }
 
     @Override
