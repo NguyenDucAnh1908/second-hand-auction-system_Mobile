@@ -1,5 +1,7 @@
 package fpt.edu.vn.asfsg1.ui.profile;
 
+import static android.content.Context.MODE_PRIVATE;
+
 import android.content.Context;
 import android.content.Intent;
 import android.content.SharedPreferences;
@@ -48,6 +50,7 @@ public class ProfileFragment extends Fragment {
     ImageView avatar, iconAuth;
     ConstraintLayout sellerChannel;
     String userObjectString;
+    SharedPreferences preferences;
 
     @Nullable
     @Override
@@ -59,7 +62,7 @@ public class ProfileFragment extends Fragment {
         binding = FragmentProfileBinding.inflate(inflater, container, false);
         View root = binding.getRoot();
 
-        SharedPreferences preferences = requireActivity().getSharedPreferences("userPrefs", Context.MODE_PRIVATE);
+        preferences = requireActivity().getSharedPreferences("userPrefs", MODE_PRIVATE);
         userObjectString = preferences.getString("userObject", null);
 
         authService = AuthRepository.getAuthService();
@@ -145,12 +148,20 @@ public class ProfileFragment extends Fragment {
         }
     }
 
+    private void clearLoginData() {
+        preferences = requireActivity().getSharedPreferences("userPrefs", MODE_PRIVATE);
+        SharedPreferences.Editor editor = preferences.edit();
+        editor.clear(); // Clears all stored data for userPrefs
+        editor.apply();
+    }
+
 
     private void initLogout() {
         TextView logout = binding.tvLogout;
 
         logout.setOnClickListener(v -> {
             authService.logout();
+            clearLoginData();
             Intent intent = new Intent(getActivity(), LoginActivity.class);
             startActivity(intent);
             getActivity().finish();

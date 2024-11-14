@@ -1,45 +1,15 @@
-package fpt.edu.vn.asfsg1.models.response;
+package fpt.edu.vn.asfsg1.models;
 
-import java.util.List;
+import fpt.edu.vn.asfsg1.models.response.ItemResponse;
 
-public class ItemResponse {
-    private String message;
-    private String status;
-    private List<Item> data;
-
-    // Getters and setters
-    public String getMessage() {
-        return message;
-    }
-
-    public void setMessage(String message) {
-        this.message = message;
-    }
-
-    public String getStatus() {
-        return status;
-    }
-
-    public void setStatus(String status) {
-        this.status = status;
-    }
-
-    public List<Item> getData() {
-        return data;
-    }
-
-    public void setData(List<Item> data) {
-        this.data = data;
-    }
-
-public static class Item {
+public class Item {
     private int itemId;
     private String itemName;
     private String itemDescription;
     private String thumbnail;
     private String itemStatus;
     private Object auction;  // Assuming auction can be null or some type
-    private SubCategory scId;
+    private ItemResponse.Item.SubCategory scId;
     private String createdAt;  // Assuming these can be null
     private String updatedAt;
 
@@ -92,11 +62,11 @@ public static class Item {
         this.auction = auction;
     }
 
-    public SubCategory getScId() {
+    public ItemResponse.Item.SubCategory getScId() {
         return scId;
     }
 
-    public void setScId(SubCategory scId) {
+    public void setScId(ItemResponse.Item.SubCategory scId) {
         this.scId = scId;
     }
 
@@ -114,28 +84,5 @@ public static class Item {
 
     public void setUpdatedAt(String updatedAt) {
         this.updatedAt = updatedAt;
-    }
-
-    public static class SubCategory {
-        private int sub_category_id;
-        private String sub_category;
-
-        // Getters and setters
-        public int getSub_category_id() {
-            return sub_category_id;
-        }
-
-        public void setSub_category_id(int sub_category_id) {
-            this.sub_category_id = sub_category_id;
-        }
-
-        public String getSub_category() {
-            return sub_category;
-        }
-
-        public void setSub_category(String sub_category) {
-            this.sub_category = sub_category;
-        }
-    }
     }
 }

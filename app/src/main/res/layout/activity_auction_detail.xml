@@ -20,12 +20,12 @@
             <androidx.constraintlayout.widget.ConstraintLayout
                 android:layout_width="match_parent"
                 android:layout_height="60dp"
-                android:layout_marginTop="24dp">
+                android:layout_marginTop="10dp">
 
                 <androidx.cardview.widget.CardView
                     android:id="@+id/btnBack"
-                    android:layout_width="50dp"
-                    android:layout_height="50dp"
+                    android:layout_width="40dp"
+                    android:layout_height="40dp"
                     android:layout_marginStart="20dp"
                     android:layout_marginEnd="20dp"
                     android:layout_gravity="center"
@@ -36,17 +36,18 @@
                     app:layout_constraintStart_toStartOf="parent"
                     app:layout_constraintTop_toTopOf="parent">
                 <ImageView
-                    android:layout_width="30dp"
-                    android:layout_height="30dp"
+                    android:layout_width="20dp"
+                    android:layout_height="20dp"
                     android:layout_gravity="center"
                     android:scaleType="centerCrop"
-                    app:srcCompat="@drawable/left_arrow" />
+                    app:srcCompat="@drawable/left_arrow"
+                    android:contentDescription="Back button"/>
                 </androidx.cardview.widget.CardView>
 
                 <androidx.cardview.widget.CardView
                     android:id="@+id/btnMore"
-                    android:layout_width="50dp"
-                    android:layout_height="50dp"
+                    android:layout_width="40dp"
+                    android:layout_height="40dp"
                     android:layout_marginEnd="20dp"
                     android:layout_gravity="center"
                     app:cardCornerRadius="36dp"
@@ -56,8 +57,8 @@
                     app:layout_constraintEnd_toEndOf="parent"
                     app:layout_constraintTop_toTopOf="parent">
                 <ImageView
-                    android:layout_width="30dp"
-                    android:layout_height="30dp"
+                    android:layout_width="20dp"
+                    android:layout_height="20dp"
                     android:layout_gravity="center"
                     android:scaleType="centerCrop"
                     app:srcCompat="@drawable/more" />
@@ -65,8 +66,8 @@
 
                 <androidx.cardview.widget.CardView
                     android:id="@+id/btnShare"
-                    android:layout_width="50dp"
-                    android:layout_height="50dp"
+                    android:layout_width="40dp"
+                    android:layout_height="40dp"
                     android:layout_marginEnd="16dp"
                     android:layout_gravity="center"
                     app:cardCornerRadius="36dp"
@@ -77,8 +78,8 @@
                     app:layout_constraintTop_toTopOf="parent">
 
                     <ImageView
-                        android:layout_width="30dp"
-                        android:layout_height="30dp"
+                        android:layout_width="20dp"
+                        android:layout_height="20dp"
                         android:layout_gravity="center"
                         android:scaleType="centerCrop"
                         app:srcCompat="@drawable/share" />
@@ -89,14 +90,14 @@
 
             <androidx.constraintlayout.widget.ConstraintLayout
                 android:layout_width="match_parent"
-                android:layout_height="290dp"
+                android:layout_height="210dp"
                 android:layout_margin="16dp"
                 android:background="@drawable/white_bg">
 
                 <androidx.viewpager2.widget.ViewPager2
                     android:id="@+id/viewpageSlider"
                     android:layout_width="match_parent"
-                    android:layout_height="290dp"
+                    android:layout_height="210dp"
                     app:layout_constraintEnd_toEndOf="parent"
                     app:layout_constraintStart_toStartOf="parent"
                     app:layout_constraintTop_toTopOf="parent" />
@@ -132,16 +133,16 @@
                     android:textSize="23sp"/>
             </LinearLayout>
 
-            <TextView
-                android:id="@+id/subcategory"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:text="sub_cate"
-                android:textSize="18sp"
-                android:layout_marginStart="16dp"
-                android:layout_marginTop="10dp"
-                android:fontFamily="@font/roboto_regular"
-                android:textColor="@color/text"/>
+<!--            <TextView-->
+<!--                android:id="@+id/subcategory"-->
+<!--                android:layout_width="wrap_content"-->
+<!--                android:layout_height="wrap_content"-->
+<!--                android:text="sub_cate"-->
+<!--                android:textSize="18sp"-->
+<!--                android:layout_marginStart="16dp"-->
+<!--                android:layout_marginTop="10dp"-->
+<!--                android:fontFamily="@font/roboto_regular"-->
+<!--                android:textColor="@color/text"/>-->
 
                 <TextView
                     android:id="@+id/titleTxt"
@@ -152,42 +153,11 @@
                     android:layout_marginStart="16dp"
                     android:layout_marginEnd="16dp"
                     android:layout_marginTop="10dp"
-                    android:layout_gravity="center"
+                    android:layout_gravity="left"
                     android:text="title"
                     android:textColor="@color/text"
                     android:fontFamily="@font/roboto_bold"
                     android:textSize="23sp"/>
-
-            <LinearLayout
-                android:id="@+id/startPrice"
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:orientation="horizontal"
-                android:layout_marginStart="16dp"
-                android:layout_marginTop="10dp">
-
-                <TextView
-                    android:id="@+id/tvStartPrice"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:text="Giá khởi điểm: "
-                    android:layout_gravity="center"
-                    android:fontFamily="@font/roboto_bold"
-                    android:textColor="@color/black"
-                    android:textSize="20sp"/>
-
-                <TextView
-                    android:id="@+id/priceTxt"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:layout_marginStart="8dp"
-                    android:text="300000VNĐ"
-                    android:textColor="@color/black"
-                    android:fontFamily="@font/roboto_regular"
-                    android:layout_gravity="center"
-                    android:textSize="23sp"
-                    android:textStyle="bold" />
-            </LinearLayout>
 
             <LinearLayout
                 android:id="@+id/recentPrice"
@@ -205,7 +175,7 @@
                     android:layout_gravity="center"
                     android:fontFamily="@font/roboto_bold"
                     android:textColor="@color/black"
-                    android:textSize="20sp"/>
+                    android:textSize="13sp"/>
 
                 <TextView
                     android:id="@+id/numberRecent"
@@ -216,9 +186,42 @@
                     android:textColor="@color/black"
                     android:fontFamily="@font/roboto_regular"
                     android:layout_gravity="center"
-                    android:textSize="23sp"
+                    android:textSize="18sp"
                     android:textStyle="bold" />
             </LinearLayout>
+
+            <LinearLayout
+                android:id="@+id/startPrice"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:orientation="horizontal"
+                android:layout_marginStart="16dp"
+                android:layout_marginTop="10dp">
+
+                <TextView
+                    android:id="@+id/tvStartPrice"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="Giá khởi điểm: "
+                    android:layout_gravity="center"
+                    android:fontFamily="@font/roboto_bold"
+                    android:textColor="@color/black"
+                    android:textSize="13sp"/>
+
+                <TextView
+                    android:id="@+id/priceTxt"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginStart="8dp"
+                    android:text="300000VNĐ"
+                    android:textColor="@color/black"
+                    android:fontFamily="@font/roboto_regular"
+                    android:layout_gravity="center"
+                    android:textSize="18sp"
+                    android:textStyle="bold" />
+            </LinearLayout>
+
+
 
             <LinearLayout
                 android:id="@+id/shipping"
@@ -235,7 +238,7 @@
                     android:layout_gravity="center"
                     android:fontFamily="@font/roboto_bold"
                     android:textColor="@color/black"
-                    android:textSize="20sp"/>
+                    android:textSize="13sp"/>
 
                 <TextView
                     android:id="@+id/tvShipping"
@@ -246,7 +249,7 @@
                     android:textColor="@color/black"
                     android:fontFamily="@font/roboto_regular"
                     android:layout_gravity="center"
-                    android:textSize="20sp" />
+                    android:textSize="13sp" />
             </LinearLayout>
 
             <LinearLayout
@@ -263,7 +266,7 @@
                     android:text="Thanh toán: "
                     android:fontFamily="@font/roboto_bold"
                     android:textColor="@color/black"
-                    android:textSize="20sp"/>
+                    android:textSize="13sp"/>
 
                 <LinearLayout
                     android:layout_width="match_parent"
@@ -319,13 +322,13 @@
                         android:id="@+id/view2"
                         android:layout_width="match_parent"
                         android:layout_height="1dp"
-                        android:background="#d8d8d8" />
+                        android:background="@color/background" />
                 </com.google.android.material.appbar.AppBarLayout>
 
                 <androidx.viewpager.widget.ViewPager
                     android:id="@+id/viewpaper"
                     android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
+                    android:layout_height="330dp"
                     android:background="@color/white" />
 
             </LinearLayout>
@@ -344,11 +347,12 @@
         android:background="?android:attr/windowBackground"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintLeft_toLeftOf="parent"
-        app:layout_constraintRight_toRightOf="parent"
-        >
+        app:layout_constraintRight_toRightOf="parent">
+
         <LinearLayout
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
+            android:layout_gravity="bottom"
             android:orientation="horizontal">
 
             <androidx.appcompat.widget.AppCompatButton
@@ -361,7 +365,7 @@
                 android:layout_weight="0.5"
                 android:paddingStart="5dp"
                 android:paddingEnd="5dp"
-                android:text="Danh sách người tham gia đấu giá"
+                android:text="Lượt đấu giá"
                 android:layout_gravity="center"
                 android:fontFamily="@font/roboto_bold"
                 android:textColor="@color/black"

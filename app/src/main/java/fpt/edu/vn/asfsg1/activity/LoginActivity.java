@@ -51,10 +51,20 @@ public class LoginActivity extends AppCompatActivity {
         getWindow().setFlags(WindowManager.LayoutParams.FLAG_FULLSCREEN, WindowManager.LayoutParams.FLAG_FULLSCREEN);
         binding = ActivityLoginBinding.inflate(getLayoutInflater());
         setContentView(binding.getRoot());
-
         authService = AuthRepository.getAuthService();
+
+        if (isUserLoggedIn()) {
+            navigateToMainActivity();
+            return; // End the current activity as user is already logged in
+        }
+        
         initializeUI();
         setupBackNavigation();
+    }
+
+    private boolean isUserLoggedIn() {
+        SharedPreferences preferences = getSharedPreferences("userPrefs", MODE_PRIVATE);
+        return preferences.contains("userObject"); // Returns true if userObject is saved
     }
 
     private void initializeUI() {
@@ -143,6 +153,7 @@ public class LoginActivity extends AppCompatActivity {
         JSONObject userObject = createUserJSONObject(loginResponse);
         SharedPreferences preferences = getSharedPreferences("userPrefs", MODE_PRIVATE);
         preferences.edit().putString("userObject", userObject.toString()).apply();
+        preferences.edit().putString("token", TokenManager.getToken().toString()).apply();
     }
 
     private JSONObject createUserJSONObject(LoginResponse loginResponse) {

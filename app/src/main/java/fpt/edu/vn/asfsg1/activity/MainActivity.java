@@ -20,7 +20,7 @@ import androidx.fragment.app.Fragment;
 
 public class MainActivity extends AppCompatActivity {
 
-    ActivityMainBinding binding;
+    private ActivityMainBinding binding;
     private boolean doubleBackToExitPressedOnce = false;
 
     @Override
@@ -43,6 +43,8 @@ public class MainActivity extends AppCompatActivity {
             }
             return true;
         });
+
+
 
         setupBackNavigation();
     }

@@ -24,4 +24,5 @@
     <string name="login">Đã có tài khoản? Đăng nhập</string>
     <string name="profile">Tài khoản</string>
     <string name="prompt_fullname">Họ và tên</string>
+    <string name="term_register_auction">Tôi đã đọc và nghiên cứu đầy đủ các thông tin của hồ sơ tham dự đấu giá. Tôi cam kết thực hiện đúng các quy định trong hồ sơ và quy định pháp luật liên quan.</string>
 </resources>

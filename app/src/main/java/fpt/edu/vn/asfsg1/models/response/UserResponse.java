@@ -1,9 +1,13 @@
 package fpt.edu.vn.asfsg1.models.response;
 
+import java.util.List;
+
+import fpt.edu.vn.asfsg1.models.User;
+
 public class UserResponse {
     private String message;
     private String status;
-    private UserData data;
+    private List<User> data;
 
     public String getMessage() {
         return message;
@@ -13,47 +17,7 @@ public class UserResponse {
         return status;
     }
 
-    public UserData getData() {
+    public List<User> getData() {
         return data;
-    }
-
-
-
-    public static class UserData {
-        private int id;
-        private String fullName;
-        private String email;
-        private String avatar;
-        private String phoneNumber;
-        private String role;
-        private boolean status;
-
-        public int getId() {
-            return id;
-        }
-
-        public String getFullName() {
-            return fullName;
-        }
-
-        public String getEmail() {
-            return email;
-        }
-
-        public String getAvatar() {
-            return avatar;
-        }
-
-        public String getPhoneNumber() {
-            return phoneNumber;
-        }
-
-        public String getRole() {
-            return role;
-        }
-
-        public boolean isStatus() {
-            return status;
-        }
     }
 }

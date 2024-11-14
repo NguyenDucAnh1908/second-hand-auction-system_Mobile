@@ -1,8 +1,10 @@
 package fpt.edu.vn.asfsg1.tokenManager;
 
+import android.app.Application;
+
 import org.json.JSONObject;
 
-public class TokenManager {
+public class TokenManager extends Application {
     private static String token = null;
     private static String userId = null;
     private static JSONObject userObject = null;
