@@ -1,253 +1,773 @@
 <?xml version="1.0" encoding="utf-8"?>
-<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
-    android:layout_width="match_parent"
-    android:layout_height="match_parent"
+<ScrollView xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
-    android:orientation="vertical">
+    android:layout_width="match_parent"
+    android:layout_height="match_parent">
 
+    <!-- Bọc tất cả trong 1 ScrollView để dễ cuộn nếu có nhiều thông tin. -->
     <LinearLayout
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:layout_marginTop="20dp"
-        android:orientation="horizontal">
-        <TextView
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_marginStart="10dp"
-            android:text="Tình trạng sản phẩm:"
-            android:fontFamily="@font/roboto_bold"
-            android:textSize="16sp"
-            android:textColor="@color/black" />
+        android:orientation="vertical"
+        android:padding="16dp"
+        android:dividerPadding="8dp"
+        android:showDividers="none">
 
-        <TextView
-            android:id="@+id/tvPercent"
-            android:layout_width="wrap_content"
+        <!-- Hình ảnh thiết bị -->
+        <LinearLayout
+            android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:layout_marginStart="10dp"
-            android:fontFamily="@font/roboto_regular"
-            android:text="95%"
-            android:textSize="16sp"
-            android:textColor="@color/black" />
+            android:orientation="vertical"
+            android:layout_marginTop="8dp">
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="Hình ảnh thiết bị:"
+                android:fontFamily="@font/roboto_bold"
+                android:textSize="16sp"
+                android:textColor="@color/black" />
+
+            <ImageView
+                android:id="@+id/ivDeviceImage"
+                android:layout_width="300dp"
+                android:layout_height="300dp"
+                android:layout_marginStart="8dp"
+                android:scaleType="fitCenter"
+                android:src="@drawable/warning"
+                android:contentDescription="Ảnh thiết bị" />
+        </LinearLayout>
+
+        <!-- Thông tin Pin (Battery Health) -->
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="horizontal"
+            android:layout_marginTop="8dp">
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="Dung lượng Pin (Battery Health):"
+                android:fontFamily="@font/roboto_bold"
+                android:textSize="16sp"
+                android:textColor="@color/black" />
+
+            <TextView
+                android:id="@+id/tvBatteryHealth"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginStart="8dp"
+                android:fontFamily="@font/roboto_regular"
+                android:textSize="16sp"
+                android:textColor="@color/black"
+                android:text="100%" />
+        </LinearLayout>
+
+        <!-- IMEI -->
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="horizontal"
+            android:layout_marginTop="8dp">
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="IMEI:"
+                android:fontFamily="@font/roboto_bold"
+                android:textSize="16sp"
+                android:textColor="@color/black" />
+
+            <TextView
+                android:id="@+id/tvImei"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginStart="8dp"
+                android:fontFamily="@font/roboto_regular"
+                android:textSize="16sp"
+                android:textColor="@color/black"
+                android:text="357994257490972" />
+        </LinearLayout>
+
+        <!-- Bộ nhớ (Storage) -->
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="horizontal"
+            android:layout_marginTop="8dp">
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="Bộ nhớ (Storage):"
+                android:fontFamily="@font/roboto_bold"
+                android:textSize="16sp"
+                android:textColor="@color/black" />
+
+            <TextView
+                android:id="@+id/tvStorage"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginStart="8dp"
+                android:fontFamily="@font/roboto_regular"
+                android:textSize="16sp"
+                android:textColor="@color/black"
+                android:text="512GB" />
+        </LinearLayout>
+
+        <!-- Tình trạng thân máy (Body Condition) -->
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="horizontal"
+            android:layout_marginTop="8dp">
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="Tình trạng thân máy:"
+                android:fontFamily="@font/roboto_bold"
+                android:textSize="16sp"
+                android:textColor="@color/black" />
+
+            <TextView
+                android:id="@+id/tvBodyCondition"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginStart="8dp"
+                android:fontFamily="@font/roboto_regular"
+                android:textSize="16sp"
+                android:textColor="@color/black"
+                android:text="Good" />
+        </LinearLayout>
+
+        <!-- Tình trạng màn hình (Screen Condition) -->
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="horizontal"
+            android:layout_marginTop="8dp">
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="Tình trạng màn hình:"
+                android:fontFamily="@font/roboto_bold"
+                android:textSize="16sp"
+                android:textColor="@color/black" />
+
+            <TextView
+                android:id="@+id/tvScreenCondition"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginStart="8dp"
+                android:fontFamily="@font/roboto_regular"
+                android:textSize="16sp"
+                android:textColor="@color/black"
+                android:text="Like New" />
+        </LinearLayout>
+
+        <!-- Tình trạng camera (Camera Condition) -->
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="horizontal"
+            android:layout_marginTop="8dp">
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="Tình trạng camera:"
+                android:fontFamily="@font/roboto_bold"
+                android:textSize="16sp"
+                android:textColor="@color/black" />
+
+            <TextView
+                android:id="@+id/tvCameraCondition"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginStart="8dp"
+                android:fontFamily="@font/roboto_regular"
+                android:textSize="16sp"
+                android:textColor="@color/black"
+                android:text="Like New" />
+        </LinearLayout>
+
+        <!-- Tình trạng cổng (Port Condition) -->
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="horizontal"
+            android:layout_marginTop="8dp">
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="Tình trạng cổng kết nối:"
+                android:fontFamily="@font/roboto_bold"
+                android:textSize="16sp"
+                android:textColor="@color/black" />
+
+            <TextView
+                android:id="@+id/tvPortCondition"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginStart="8dp"
+                android:fontFamily="@font/roboto_regular"
+                android:textSize="16sp"
+                android:textColor="@color/black"
+                android:text="USB-C" />
+        </LinearLayout>
+
+        <!-- Tình trạng nút bấm (Button Condition) -->
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="horizontal"
+            android:layout_marginTop="8dp">
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="Tình trạng nút bấm:"
+                android:fontFamily="@font/roboto_bold"
+                android:textSize="16sp"
+                android:textColor="@color/black" />
+
+            <TextView
+                android:id="@+id/tvButtonCondition"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginStart="8dp"
+                android:fontFamily="@font/roboto_regular"
+                android:textSize="16sp"
+                android:textColor="@color/black"
+                android:text="Like New" />
+        </LinearLayout>
+
+        <!-- Thương hiệu (Brand) -->
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="horizontal"
+            android:layout_marginTop="8dp">
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="Thương hiệu:"
+                android:fontFamily="@font/roboto_bold"
+                android:textSize="16sp"
+                android:textColor="@color/black" />
+
+            <TextView
+                android:id="@+id/tvBrand"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginStart="8dp"
+                android:fontFamily="@font/roboto_regular"
+                android:textSize="16sp"
+                android:textColor="@color/black"
+                android:text="Samsung" />
+        </LinearLayout>
+
+        <!-- Model -->
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="horizontal"
+            android:layout_marginTop="8dp">
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="Model:"
+                android:fontFamily="@font/roboto_bold"
+                android:textSize="16sp"
+                android:textColor="@color/black" />
+
+            <TextView
+                android:id="@+id/tvModel"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginStart="8dp"
+                android:fontFamily="@font/roboto_regular"
+                android:textSize="16sp"
+                android:textColor="@color/black"
+                android:text="SM-S928U" />
+        </LinearLayout>
+
+        <!-- Serial -->
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="horizontal"
+            android:layout_marginTop="8dp">
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="Serial:"
+                android:fontFamily="@font/roboto_bold"
+                android:textSize="16sp"
+                android:textColor="@color/black" />
+
+            <TextView
+                android:id="@+id/tvSerial"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginStart="8dp"
+                android:fontFamily="@font/roboto_regular"
+                android:textSize="16sp"
+                android:textColor="@color/black"
+                android:text="749097" />
+        </LinearLayout>
+
+        <!-- Control Number -->
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="horizontal"
+            android:layout_marginTop="8dp">
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="Số kiểm soát:"
+                android:fontFamily="@font/roboto_bold"
+                android:textSize="16sp"
+                android:textColor="@color/black" />
+
+            <TextView
+                android:id="@+id/tvControlNumber"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginStart="8dp"
+                android:fontFamily="@font/roboto_regular"
+                android:textSize="16sp"
+                android:textColor="@color/black"
+                android:text="N/A" />
+        </LinearLayout>
+
+        <!-- Nhà sản xuất (Manufacturer) -->
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="horizontal"
+            android:layout_marginTop="8dp"
+            android:layout_marginBottom="16dp">
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="Nhà sản xuất:"
+                android:fontFamily="@font/roboto_bold"
+                android:textSize="16sp"
+                android:textColor="@color/black" />
+
+            <TextView
+                android:id="@+id/tvManufacturer"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginStart="8dp"
+                android:fontFamily="@font/roboto_regular"
+                android:textSize="16sp"
+                android:textColor="@color/black"
+                android:text="N/A" />
+        </LinearLayout>
+
+
+        <!-- CPU -->
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="horizontal"
+            android:layout_marginTop="8dp">
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="Chip xử lý:"
+                android:fontFamily="@font/roboto_bold"
+                android:textSize="16sp"
+                android:textColor="@color/black" />
+
+            <TextView
+                android:id="@+id/tvCpu"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginStart="8dp"
+                android:fontFamily="@font/roboto_regular"
+                android:textSize="16sp"
+                android:textColor="@color/black"
+                android:text="Apple A14 Bionic" />
+        </LinearLayout>
+
+        <!-- RAM -->
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="horizontal"
+            android:layout_marginTop="8dp">
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="RAM:"
+                android:fontFamily="@font/roboto_bold"
+                android:textSize="16sp"
+                android:textColor="@color/black" />
+
+            <TextView
+                android:id="@+id/tvRam"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginStart="8dp"
+                android:fontFamily="@font/roboto_regular"
+                android:textSize="16sp"
+                android:textColor="@color/black"
+                android:text="4GB" />
+        </LinearLayout>
+
+        <!-- Kích thước màn hình (screen_size) -->
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="horizontal"
+            android:layout_marginTop="8dp">
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="Kích thước màn hình:"
+                android:fontFamily="@font/roboto_bold"
+                android:textSize="16sp"
+                android:textColor="@color/black" />
+
+            <TextView
+                android:id="@+id/tvScreenSize"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginStart="8dp"
+                android:fontFamily="@font/roboto_regular"
+                android:textSize="16sp"
+                android:textColor="@color/black"
+                android:text="6.1 inch" />
+        </LinearLayout>
+
+        <!-- Thông số camera (camera_specs) -->
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="horizontal"
+            android:layout_marginTop="8dp">
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="Camera:"
+                android:fontFamily="@font/roboto_bold"
+                android:textSize="16sp"
+                android:textColor="@color/black" />
+
+            <TextView
+                android:id="@+id/tvCameraSpecs"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginStart="8dp"
+                android:fontFamily="@font/roboto_regular"
+                android:textSize="16sp"
+                android:textColor="@color/black"
+                android:text="12MP (2 camera)" />
+        </LinearLayout>
+
+        <!-- Kết nối (connectivity) -->
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="horizontal"
+            android:layout_marginTop="8dp">
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="Kết nối:"
+                android:fontFamily="@font/roboto_bold"
+                android:textSize="16sp"
+                android:textColor="@color/black" />
+
+            <TextView
+                android:id="@+id/tvConnectivity"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginStart="8dp"
+                android:fontFamily="@font/roboto_regular"
+                android:textSize="16sp"
+                android:textColor="@color/black"
+                android:text="Wi-Fi, GPS, NFC" />
+        </LinearLayout>
+
+        <!-- Cảm biến (sensors) -->
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="horizontal"
+            android:layout_marginTop="8dp">
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="Cảm biến:"
+                android:fontFamily="@font/roboto_bold"
+                android:textSize="16sp"
+                android:textColor="@color/black" />
+
+            <TextView
+                android:id="@+id/tvSensors"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginStart="8dp"
+                android:fontFamily="@font/roboto_regular"
+                android:textSize="16sp"
+                android:textColor="@color/black"
+                android:text="Face ID, accelerometer, gyro" />
+        </LinearLayout>
+
+        <!-- SIM -->
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="horizontal"
+            android:layout_marginTop="8dp">
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="SIM:"
+                android:fontFamily="@font/roboto_bold"
+                android:textSize="16sp"
+                android:textColor="@color/black" />
+
+            <TextView
+                android:id="@+id/tvSim"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginStart="8dp"
+                android:fontFamily="@font/roboto_regular"
+                android:textSize="16sp"
+                android:textColor="@color/black"
+                android:text="Nano SIM + eSIM" />
+        </LinearLayout>
+
+        <!-- Số SIM (sim_slots) -->
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="horizontal"
+            android:layout_marginTop="8dp">
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="Số khe SIM:"
+                android:fontFamily="@font/roboto_bold"
+                android:textSize="16sp"
+                android:textColor="@color/black" />
+
+            <TextView
+                android:id="@+id/tvSimSlots"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginStart="8dp"
+                android:fontFamily="@font/roboto_regular"
+                android:textSize="16sp"
+                android:textColor="@color/black"
+                android:text="2" />
+        </LinearLayout>
+
+        <!-- Hệ điều hành (os) -->
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="horizontal"
+            android:layout_marginTop="8dp">
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="Hệ điều hành:"
+                android:fontFamily="@font/roboto_bold"
+                android:textSize="16sp"
+                android:textColor="@color/black" />
+
+            <TextView
+                android:id="@+id/tvOs"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginStart="8dp"
+                android:fontFamily="@font/roboto_regular"
+                android:textSize="16sp"
+                android:textColor="@color/black"
+                android:text="iOS" />
+        </LinearLayout>
+
+        <!-- OS Family (os_family) -->
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="horizontal"
+            android:layout_marginTop="8dp">
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="OS Family:"
+                android:fontFamily="@font/roboto_bold"
+                android:textSize="16sp"
+                android:textColor="@color/black" />
+
+            <TextView
+                android:id="@+id/tvOsFamily"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginStart="8dp"
+                android:fontFamily="@font/roboto_regular"
+                android:textSize="16sp"
+                android:textColor="@color/black"
+                android:text="iOS" />
+        </LinearLayout>
+
+        <!-- Bluetooth -->
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="horizontal"
+            android:layout_marginTop="8dp">
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="Bluetooth:"
+                android:fontFamily="@font/roboto_bold"
+                android:textSize="16sp"
+                android:textColor="@color/black" />
+
+            <TextView
+                android:id="@+id/tvBluetooth"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginStart="8dp"
+                android:fontFamily="@font/roboto_regular"
+                android:textSize="16sp"
+                android:textColor="@color/black"
+                android:text="v5.0" />
+        </LinearLayout>
+
+        <!-- USB -->
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="horizontal"
+            android:layout_marginTop="8dp">
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="Cổng USB:"
+                android:fontFamily="@font/roboto_bold"
+                android:textSize="16sp"
+                android:textColor="@color/black" />
+
+            <TextView
+                android:id="@+id/tvUsb"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginStart="8dp"
+                android:fontFamily="@font/roboto_regular"
+                android:textSize="16sp"
+                android:textColor="@color/black"
+                android:text="Lightning" />
+        </LinearLayout>
+
+        <!-- WLAN -->
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="horizontal"
+            android:layout_marginTop="8dp">
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="WLAN:"
+                android:fontFamily="@font/roboto_bold"
+                android:textSize="16sp"
+                android:textColor="@color/black" />
+
+            <TextView
+                android:id="@+id/tvWlan"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginStart="8dp"
+                android:fontFamily="@font/roboto_regular"
+                android:textSize="16sp"
+                android:textColor="@color/black"
+                android:text="Wi-Fi 802.11 a/b/g/n/ac" />
+        </LinearLayout>
+
+        <!-- Tốc độ (speed) -->
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="horizontal"
+            android:layout_marginTop="8dp">
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="Tốc độ mạng:"
+                android:fontFamily="@font/roboto_bold"
+                android:textSize="16sp"
+                android:textColor="@color/black" />
+
+            <TextView
+                android:id="@+id/tvSpeed"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginStart="8dp"
+                android:fontFamily="@font/roboto_regular"
+                android:textSize="16sp"
+                android:textColor="@color/black"
+                android:text="HSPA 42.2/5.76 Mbps, LTE-A, 5G" />
+        </LinearLayout>
+
+        <!-- Công nghệ mạng (network_technology) -->
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="horizontal"
+            android:layout_marginTop="8dp"
+            android:layout_marginBottom="16dp">
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="Công nghệ mạng:"
+                android:fontFamily="@font/roboto_bold"
+                android:textSize="16sp"
+                android:textColor="@color/black" />
+
+            <TextView
+                android:id="@+id/tvNetworkTechnology"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginStart="8dp"
+                android:fontFamily="@font/roboto_regular"
+                android:textSize="16sp"
+                android:textColor="@color/black"
+                android:text="GSM / CDMA / HSPA / EVDO / LTE / 5G" />
+        </LinearLayout>
 
     </LinearLayout>
-
-    <LinearLayout
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:orientation="horizontal">
-
-        <TextView
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:text="Loại sản phẩm:"
-            android:layout_marginStart="10dp"
-            android:fontFamily="@font/roboto_bold"
-            android:textSize="16sp"
-            android:textColor="@color/black"
-            android:layout_marginTop="8dp" />
-
-        <TextView
-            android:id="@+id/tvType"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:text="Smartphone"
-            android:layout_marginStart="10dp"
-            android:fontFamily="@font/roboto_regular"
-            android:textSize="16sp"
-            android:textColor="@color/black"
-            android:layout_marginTop="8dp" />
-    </LinearLayout>
-
-    <LinearLayout
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:orientation="horizontal">
-
-        <TextView
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:text="Màu sắc:"
-            android:textSize="16sp"
-            android:layout_marginStart="10dp"
-            android:fontFamily="@font/roboto_bold"
-            android:textColor="@color/black"
-            app:layout_constraintTop_toBottomOf="@id/tvType"
-            app:layout_constraintStart_toStartOf="parent"
-            android:layout_marginTop="8dp" />
-
-        <TextView
-            android:id="@+id/tvColor"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:text="Đen"
-            android:layout_marginStart="10dp"
-            android:fontFamily="@font/roboto_regular"
-            android:textSize="16sp"
-            android:textColor="@color/black"
-            app:layout_constraintTop_toBottomOf="@id/tvType"
-            app:layout_constraintStart_toStartOf="parent"
-            android:layout_marginTop="8dp" />
-
-    </LinearLayout>
-
-    <LinearLayout
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:orientation="horizontal">
-
-        <TextView
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:text="Cân nặng:"
-            android:textSize="16sp"
-            android:layout_marginStart="10dp"
-            android:fontFamily="@font/roboto_bold"
-            android:textColor="@color/black"
-            app:layout_constraintTop_toBottomOf="@id/tvType"
-            app:layout_constraintStart_toStartOf="parent"
-            android:layout_marginTop="8dp" />
-
-        <TextView
-            android:id="@+id/tvWeight"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:text="230gr"
-            android:layout_marginStart="10dp"
-            android:fontFamily="@font/roboto_regular"
-            android:textSize="16sp"
-            android:textColor="@color/black"
-            app:layout_constraintTop_toBottomOf="@id/tvType"
-            app:layout_constraintStart_toStartOf="parent"
-            android:layout_marginTop="8dp" />
-
-    </LinearLayout>
-
-    <LinearLayout
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:orientation="horizontal">
-
-        <TextView
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:text="Kích thước:"
-            android:textSize="16sp"
-            android:layout_marginStart="10dp"
-            android:fontFamily="@font/roboto_bold"
-            android:textColor="@color/black"
-            app:layout_constraintTop_toBottomOf="@id/tvType"
-            app:layout_constraintStart_toStartOf="parent"
-            android:layout_marginTop="8dp" />
-
-        <TextView
-            android:id="@+id/tvDimension"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:text="146.7 x 71.5 x 7.4mm"
-            android:layout_marginStart="10dp"
-            android:fontFamily="@font/roboto_regular"
-            android:textSize="16sp"
-            android:textColor="@color/black"
-            app:layout_constraintTop_toBottomOf="@id/tvType"
-            app:layout_constraintStart_toStartOf="parent"
-            android:layout_marginTop="8dp" />
-
-    </LinearLayout>
-
-    <LinearLayout
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:orientation="horizontal">
-
-        <TextView
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:text="Nguồn gốc:"
-            android:textSize="16sp"
-            android:layout_marginStart="10dp"
-            android:fontFamily="@font/roboto_bold"
-            android:textColor="@color/black"
-            app:layout_constraintTop_toBottomOf="@id/tvType"
-            app:layout_constraintStart_toStartOf="parent"
-            android:layout_marginTop="8dp" />
-
-        <TextView
-            android:id="@+id/tvOrigin"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:text="Chính hãng"
-            android:layout_marginStart="10dp"
-            android:fontFamily="@font/roboto_regular"
-            android:textSize="16sp"
-            android:textColor="@color/black"
-            app:layout_constraintTop_toBottomOf="@id/tvType"
-            app:layout_constraintStart_toStartOf="parent"
-            android:layout_marginTop="8dp" />
-
-    </LinearLayout>
-
-    <LinearLayout
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:orientation="horizontal">
-
-        <TextView
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:text="Ngày sản xuất:"
-            android:textSize="16sp"
-            android:layout_marginStart="10dp"
-            android:fontFamily="@font/roboto_bold"
-            android:textColor="@color/black"
-            app:layout_constraintTop_toBottomOf="@id/tvType"
-            app:layout_constraintStart_toStartOf="parent"
-            android:layout_marginTop="8dp" />
-
-        <TextView
-            android:id="@+id/tvManufactureDate"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:text="2020-10-23"
-            android:layout_marginStart="10dp"
-            android:fontFamily="@font/roboto_regular"
-            android:textSize="16sp"
-            android:textColor="@color/black"
-            app:layout_constraintTop_toBottomOf="@id/tvType"
-            app:layout_constraintStart_toStartOf="parent"
-            android:layout_marginTop="8dp" />
-
-    </LinearLayout>
-
-    <LinearLayout
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:orientation="horizontal">
-
-        <TextView
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:text="Chất liệu:"
-            android:textSize="16sp"
-            android:layout_marginStart="10dp"
-            android:fontFamily="@font/roboto_bold"
-            android:textColor="@color/black"
-            app:layout_constraintTop_toBottomOf="@id/tvType"
-            app:layout_constraintStart_toStartOf="parent"
-            android:layout_marginTop="8dp" />
-
-        <TextView
-            android:id="@+id/tvMaterial"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:text="Kim loại"
-            android:layout_marginStart="10dp"
-            android:fontFamily="@font/roboto_regular"
-            android:textSize="16sp"
-            android:textColor="@color/black"
-            app:layout_constraintTop_toBottomOf="@id/tvType"
-            app:layout_constraintStart_toStartOf="parent"
-            android:layout_marginTop="8dp" />
-
-    </LinearLayout>
-
-</LinearLayout>
+</ScrollView>

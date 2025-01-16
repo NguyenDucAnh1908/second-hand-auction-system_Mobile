@@ -1,14 +1,17 @@
 package fpt.edu.vn.asfsg1.models;
 
-public class Auction {
+import java.io.Serializable;
+
+public class Auction implements Serializable {
+    private int auctionId;
     private String startDate;
     private String endDate;
     private String start_time;
     private String end_time;
-    private int start_price;
+    private double start_price;
     private String description;
     private String terms_conditions;
-    private int price_step;
+    private double price_step;
     private String ship_type;
     private String status;
     private String approved_by;
@@ -32,7 +35,7 @@ public class Auction {
         return end_time;
     }
 
-    public int getStart_price() {
+    public double getStart_price() {
         return start_price;
     }
 
@@ -44,7 +47,7 @@ public class Auction {
         return terms_conditions;
     }
 
-    public int getPrice_step() {
+    public double getPrice_step() {
         return price_step;
     }
 
@@ -70,5 +73,9 @@ public class Auction {
 
     public int getItemId() {
         return itemId;
+    }
+
+    public int getAuctionId() {
+        return auctionId;
     }
 }

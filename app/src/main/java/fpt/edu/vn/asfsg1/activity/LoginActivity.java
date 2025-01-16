@@ -29,6 +29,9 @@ import android.window.OnBackInvokedCallback;
 
 import org.json.JSONException;
 import org.json.JSONObject;
+
+import java.io.IOException;
+
 import fpt.edu.vn.asfsg1.databinding.ActivityLoginBinding;
 import fpt.edu.vn.asfsg1.helper.AuthRepository;
 import fpt.edu.vn.asfsg1.models.request.LoginRequest;
@@ -72,6 +75,9 @@ public class LoginActivity extends AppCompatActivity {
         setSpannableText(binding.tvSignUp, "Chưa có tài khoản? Đăng ký", "Đăng ký");
         setSpannableText(binding.tvForgetPassword, "Quên mật khẩu? Lấy lại mật khẩu", "Lấy lại mật khẩu");
 
+        binding.username.setText("chanhtong11@gmail.com");
+        binding.password.setText("Trieuvanlv6o$");
+
         binding.username.addTextChangedListener(getEmailTextWatcher());
         binding.password.addTextChangedListener(getPasswordTextWatcher());
 
@@ -110,10 +116,19 @@ public class LoginActivity extends AppCompatActivity {
             @Override
             public void onFailure(Call<LoginResponse> call, Throwable t) {
                 binding.loading.setVisibility(View.GONE);
-                Toast.makeText(LoginActivity.this, "Fail: Đăng nhập thất bại", Toast.LENGTH_SHORT).show();
+                if (t instanceof IOException) {
+                    // Có thể do lỗi mạng
+                    Toast.makeText(LoginActivity.this, "Lỗi mạng: " + t.getMessage(), Toast.LENGTH_SHORT).show();
+                } else {
+                    // Có thể là lỗi khác
+                    Toast.makeText(LoginActivity.this, "Lỗi không xác định: " + t.getMessage(), Toast.LENGTH_SHORT).show();
+                }
+                t.printStackTrace();
             }
         });
     }
+
+
 
     private void handleLoginSuccess(LoginResponse loginResponse) {
         if (loginResponse.getStatus() == 200) {

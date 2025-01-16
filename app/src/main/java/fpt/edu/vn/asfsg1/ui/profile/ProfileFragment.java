@@ -29,6 +29,7 @@ import fpt.edu.vn.asfsg1.activity.KYCActivity;
 import fpt.edu.vn.asfsg1.activity.LoginActivity;
 import fpt.edu.vn.asfsg1.activity.PurchaseHistoryActivity;
 import fpt.edu.vn.asfsg1.activity.SellerActivity;
+import fpt.edu.vn.asfsg1.activity.WalletActivity;
 import fpt.edu.vn.asfsg1.databinding.FragmentProfileBinding;
 import fpt.edu.vn.asfsg1.helper.AuthRepository;
 import fpt.edu.vn.asfsg1.helper.UserRepository;
@@ -85,6 +86,15 @@ public class ProfileFragment extends Fragment {
                 getActivity().finish();
             }
         });
+
+        binding.btnWallet.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                Intent intent = new Intent(getActivity(), WalletActivity.class);
+                startActivity(intent);
+                getActivity().finish();
+            }
+        });
     }
 
     private void initInfo() {
@@ -96,6 +106,7 @@ public class ProfileFragment extends Fragment {
         toSeller = binding.tvToSeller;
         iconAuth = binding.iconAuth;
         tvAuth = binding.tvAuth;
+
 
 
         if (userObjectString != null) {

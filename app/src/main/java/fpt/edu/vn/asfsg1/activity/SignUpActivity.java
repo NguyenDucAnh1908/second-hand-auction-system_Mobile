@@ -45,15 +45,15 @@ public class SignUpActivity extends AppCompatActivity {
 
 
         final EditText usernameEditText = binding.username;
-        usernameEditText.setText("chotrongnha@gmail.com");
+        usernameEditText.setText("binhdx@gmail.com");
         final EditText phoneEditText = binding.phone;
-        phoneEditText.setText("0987654321");
+        phoneEditText.setText("0376819713");
         final EditText fullnameEditText = binding.fullname;
-        fullnameEditText.setText("Hoang Viet");
+        fullnameEditText.setText("Đào Xuân Bình");
         final EditText passwordEditText = binding.password;
-        passwordEditText.setText("123456789");
+        passwordEditText.setText("12345678");
         final EditText repasswordEditText = binding.repassword;
-        repasswordEditText.setText("123456789");
+        repasswordEditText.setText("12345678");
         final TextView signupButton = (TextView) binding.signup;
         final ProgressBar loadingProgressBar = binding.loading;
         final TextView tvLogin = binding.tvLogin;

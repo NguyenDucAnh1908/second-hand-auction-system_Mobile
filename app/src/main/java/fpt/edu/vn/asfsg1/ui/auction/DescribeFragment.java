@@ -1,6 +1,8 @@
 package fpt.edu.vn.asfsg1.ui.auction;
 
 import android.os.Bundle;
+import android.text.Html;
+import android.text.Spanned;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -32,6 +34,20 @@ public class DescribeFragment extends Fragment {
         super.onViewCreated(view, savedInstanceState);
 
         TextView descTxt = view.findViewById(R.id.tvDescription);
-        descTxt.setText(getArguments().getString("description",""));
+
+        // Lấy nội dung HTML từ arguments
+        String htmlDescription = getArguments() != null ? getArguments().getString("description", "") : "";
+
+        // Chuyển đổi HTML thành Spanned
+        Spanned formattedDescription;
+        if (android.os.Build.VERSION.SDK_INT >= android.os.Build.VERSION_CODES.N) {
+            formattedDescription = Html.fromHtml(htmlDescription, Html.FROM_HTML_MODE_LEGACY);
+        } else {
+            formattedDescription = Html.fromHtml(htmlDescription);
+        }
+
+        // Gán nội dung định dạng vào TextView
+        descTxt.setText(formattedDescription);
+        descTxt.setMovementMethod(android.text.method.LinkMovementMethod.getInstance()); // Kích hoạt các liên kết
     }
 }

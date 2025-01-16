@@ -1,0 +1,58 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:id="@+id/main"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    tools:context=".ui.wallet.DepositFragment">
+
+    <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:orientation="vertical"
+        android:padding="16dp">
+
+        <Spinner
+            android:id="@+id/paymentMethodSpinner"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginBottom="16dp" />
+
+        <EditText
+            android:id="@+id/amountInput"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:hint="Nhập số tiền"
+            android:textColor="@color/text"
+            android:textColorHint="#979797"
+            android:inputType="numberDecimal"
+            android:layout_marginBottom="16dp" />
+
+        <EditText
+            android:id="@+id/noteInput"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:hint="Ghi chú"
+            android:textColor="@color/text"
+            android:textColorHint="#979797"
+            android:inputType="text"
+            android:layout_marginBottom="16dp" />
+
+        <TextView
+            android:id="@+id/depositButton"
+            android:layout_width="match_parent"
+            android:layout_height="67dp"
+            android:layout_gravity="center_horizontal"
+            android:fontFamily="@font/roboto_bold"
+            android:background="@drawable/green_bg"
+            android:backgroundTint="@color/background"
+            android:enabled="true"
+            android:textColor="@color/text"
+            android:textSize="26sp"
+            android:textStyle="bold"
+            android:gravity="center"
+            android:text="Nạp tiền" />
+    </LinearLayout>
+
+</androidx.constraintlayout.widget.ConstraintLayout>
